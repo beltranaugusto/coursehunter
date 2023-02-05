@@ -6,6 +6,7 @@ import { Home } from "./pages/home";
 import { Cursos } from "./pages/cursos";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
+import { Prueba } from "./pages/prueba.jsx";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -22,8 +23,12 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Routes>
+          
+
+            <Route element={<Prueba />} path="/prueba" />
             <Route element={<Home />} path="/" />
             <Route element={<Cursos />} path="/cursos" />
+
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>

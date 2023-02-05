@@ -1,3 +1,33 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+.container-categories {
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
+.home-card-list {
+  gap: 10px;
+  display: flex;
+  overflow-x: scroll !important;
+  border-radius: 10px;
+}
+.home-card-list::-webkit-scrollbar {
+  width: 8px;
+  height: 12px;
+}
+.home-card-list::-webkit-scrollbar-track {
+  background-color: white;
+}
+.home-card-list::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 4px;
+}
+.card {
+  min-width: 300px;
+  width: 200px;
+}
+.card-button {
+  display: flex;
+  justify-content: space-between;
+}
+.card-img-top {
+  width: 300px;
+  height: 300px;
+}
