@@ -8,7 +8,7 @@ export const Categories = () => {
     <>
       <div className="home">
         <div className="container container-categories">
-          <h1>Category </h1>
+          <h1>Categoria</h1>
           <div className="home-card-list">
             <Card />
             <Card />
