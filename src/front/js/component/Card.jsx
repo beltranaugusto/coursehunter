@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Card = () => {
+export const Card = (props) => {
   return (
     <>
       <div className="card">
@@ -18,9 +18,11 @@ export const Card = () => {
             bulk of the card's content.
           </p>
           <div className="card-button">
-            <a href="#" className="btn btn-primary">
-              Ver mas
-            </a>
+            <Link to={`/${props.type}/1`}>
+              <a href="#" className="btn btn-primary">
+                Ver mas
+              </a>
+            </Link>
           </div>
         </div>
       </div>

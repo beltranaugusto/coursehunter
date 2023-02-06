@@ -5,7 +5,7 @@ import { Categories } from "../component/Categories.jsx"
 
 import { Context } from "../store/appContext";
 
-export const Cursos = () => {
+export const Events = () => {
   const { store, actions } = useContext(Context);
 
   return (
@@ -13,14 +13,13 @@ export const Cursos = () => {
     <div className="container border rounded mt-5 h-100 w-100 d-flex justify-content-end flex-column p-4">
 
       <div className="d-flex justify-content-between w-100">
-        <h3>Cursos</h3>
+        <h3>Eventos</h3>
         <SearchBar />
       </div>
 
-      {/* Lorman - Categorias */}
       <div>
-        <Categories />
-        <Categories />
+        <Categories type="evento"/>
+        <Categories type="evento"/>
       </div>  
       
 
