@@ -22,7 +22,7 @@ export const SearchBar = () => {
           <a className="dropdown-item" href="#">
             Tecnología
             <input
-              class="form-check-input mt-0float-end"
+              className="form-check-input mt-0float-end"
               type="checkbox"
               value=""
               aria-label="Checkbox"
@@ -33,7 +33,7 @@ export const SearchBar = () => {
           <a className="dropdown-item" href="#">
             Artes culinarias
             <input
-              class="form-check-input mt-0 float-end"
+              className="form-check-input mt-0 float-end"
               type="checkbox"
               value=""
               aria-label="Checkbox"
