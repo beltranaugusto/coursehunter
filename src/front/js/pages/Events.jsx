@@ -1,23 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { SearchBar } from "../tools/searchBar";
+import { Categories } from "../component/Categories.jsx"
 
 import { Context } from "../store/appContext";
 
-export const Cursos = () => {
+export const Events = () => {
   const { store, actions } = useContext(Context);
 
   return (
   <>
-    <div className="container text-center border rounded mt-5 h-100 w-100 d-flex justify-content-end flex-column p-4">
+    <div className="container border rounded mt-5 h-100 w-100 d-flex justify-content-end flex-column p-4">
 
       <div className="d-flex justify-content-between w-100">
-        <h3>Cursos</h3>
+        <h3>Eventos</h3>
         <SearchBar />
       </div>
 
-      {/* Lorman - Categorias */}
-      <div className="m-5"><p>Aqui van las categorias</p></div>  
+      <div>
+        <Categories type="evento"/>
+        <Categories type="evento"/>
+      </div>  
       
 
       <div className="d-flex justify-content-end w-100">

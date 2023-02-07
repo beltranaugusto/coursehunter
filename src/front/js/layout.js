@@ -3,11 +3,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
-import { Cursos } from "./pages/cursos";
+import { Courses } from "./pages/Courses.jsx";
+import { Events } from "./pages/Events.jsx";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import { Prueba } from "./pages/prueba.jsx";
 import { Profile } from "./pages/profile.jsx";
+import { CourseDetail } from "./pages/CourseDetail.jsx"
+import { EventDetail } from "./pages/EventDetail.jsx"
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -26,7 +29,10 @@ const Layout = () => {
             <Route element={<Profile />} path="/profile" />
             <Route element={<Prueba />} path="/prueba" />
             <Route element={<Home />} path="/" />
-            <Route element={<Cursos />} path="/cursos" />
+            <Route element={<Courses />} path="/cursos" />
+            <Route element={<Events />} path="/eventos" />
+            <Route element={<CourseDetail />} path="/curso/:id" />
+            <Route element={<EventDetail />} path="/evento/:id" />
 
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<h1>Not found!</h1>} />
