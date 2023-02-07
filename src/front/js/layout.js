@@ -7,7 +7,7 @@ import { Cursos } from "./pages/cursos";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import { Prueba } from "./pages/prueba.jsx";
-
+import { Profile } from "./pages/profile.jsx";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -23,8 +23,7 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Routes>
-          
-
+            <Route element={<Profile />} path="/profile" />
             <Route element={<Prueba />} path="/prueba" />
             <Route element={<Home />} path="/" />
             <Route element={<Cursos />} path="/cursos" />
