@@ -8,6 +8,7 @@ import { Events } from "./pages/Events.jsx";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import { Prueba } from "./pages/prueba.jsx";
+import { Profile } from "./pages/profile.jsx";
 import { CourseDetail } from "./pages/CourseDetail.jsx"
 import { CreatePost } from "./component/CreatePost.jsx";
 import { EventDetail } from "./pages/EventDetail.jsx"
@@ -27,8 +28,12 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Routes>
+<<<<<<< HEAD
           
             <Route element={<CreatePost />} path="/publicar" />
+=======
+            <Route element={<Profile />} path="/profile" />
+>>>>>>> c5d6f9422374dd3b43d600eb1c243d549cfc7a42
             <Route element={<Prueba />} path="/prueba" />
             <Route element={<Home />} path="/" />
             <Route element={<Courses />} path="/cursos" />
