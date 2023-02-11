@@ -1,0 +1,21 @@
+.post-choice {
+    max-width: 450px;
+    min-width: 300px;
+    min-height: 280px;
+}
+
+.create-post {
+    max-width: 1000px;
+}
+
+.em2 {
+    width: 2em;
+    height: 2em;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }

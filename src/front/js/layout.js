@@ -9,9 +9,11 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import { Prueba } from "./pages/prueba.jsx";
 import { CourseDetail } from "./pages/CourseDetail.jsx"
+import { CreatePost } from "./component/CreatePost.jsx";
 import { EventDetail } from "./pages/EventDetail.jsx"
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+
 
 //create your first component
 const Layout = () => {
@@ -26,7 +28,7 @@ const Layout = () => {
           <Navbar />
           <Routes>
           
-
+            <Route element={<CreatePost />} path="/publicar" />
             <Route element={<Prueba />} path="/prueba" />
             <Route element={<Home />} path="/" />
             <Route element={<Courses />} path="/cursos" />
