@@ -4,15 +4,73 @@ import { Context } from "../store/appContext";
 
 import "../../styles/CreatePost.css";
 
+// Varias cosas por hacer faltan aqui:
+// 1. Validación de Campos
+// 2. Condicionales de Online y Siempre Disponible
+// 3. Solucionar los campos cableados
+//    3.1. Category: Hacer la relacion en los modelos por en name y no por el id (no abran 2 categorias llamadas iguales asi que bien)
+//    3.2. Event: Llenar este campo dependiendo del boton que se oprima al principio de la creacion del post
+//    3.3. Certificate: Añadir el campo en su lugar correspondiente
+//    3.4. User_id: Este quedara pendiente hasta tener el sistema de logeo
+
 export const CreatePost = (props) => {
 
+    const { actions } = useContext(Context);
+
     const [step, setStep] = useState(0)
+    const [formData, setFormData] = useState({})
+
+    const [inputName, setInputName] = useState("")
+    const [inputDetail, setInputDetail] = useState("")
+
+    const [inputLocation, setInputLocation] = useState("")
+    const [inputDate, setInputDate] = useState("")
+    const [inputDuration, setInputDuration] = useState("")
+    const [inputCategory, setInputCategory] = useState("")
+
+    const [online, setOnline] = useState(false)
+    const [available, setAvailable] = useState(false)
+
+    const changeOnline = (event) => {
+        setOnline(event.target.checked);
+    }
+
+    const changeAvailable = (event) => {
+        setAvailable(event.target.checked);
+    }
+
+    useEffect(() => {
+        if (step == 1){
+            console.log("Step 1")
+       }
+        if (step == 2){
+            console.log("Step 2")
+            setFormData(prevFormData => ({...prevFormData, "name": inputName}));
+            setFormData(prevFormData => ({...prevFormData, "detail": inputDetail}));        
+        }
+        if (step == 3){
+            console.log("Step 3")
+            setFormData(prevFormData => ({...prevFormData, "location": inputLocation}));   
+            setFormData(prevFormData => ({...prevFormData, "online": online}));   
+            setFormData(prevFormData => ({...prevFormData, "date": inputDate}));   
+            setFormData(prevFormData => ({...prevFormData, "alwaysAvailable": available}));   
+            setFormData(prevFormData => ({...prevFormData, "duration": inputDuration}));  
+        
+        //Cableado
+            setFormData(prevFormData => ({...prevFormData, "category": 1}));
+            setFormData(prevFormData => ({...prevFormData, "event": false}));  
+            setFormData(prevFormData => ({...prevFormData, "user_id": 1}));   
+            setFormData(prevFormData => ({...prevFormData, "certificate": true}));   
+        }
+    }, [step])
+
 
     return (
         <>
             <div className="container"><h1 className="display-4 mx-5 my-4">Crear Publicación</h1></div>
             <div className="container border rounded h-100 w-100 d-flex flex-column p-4 create-post">
 
+                <form>
                 {step === 0 ?
                     <>
                         <h1 className="display-6 mx-4 mt-2">Elige que tipo de publicación será</h1>
@@ -40,23 +98,50 @@ export const CreatePost = (props) => {
                 {step === 1 ?
                     <>
                         <div className="row mx-4">
-                            <div className="col-6">
-                            <h1 className="display-6 mt-2">Escoge un nombre</h1>
+                            <div className="col-8">
+                            <h1 className="display-6 mt-2">Escoge un nombre y descripción</h1>
                             <p className="fs-4 fw-light text-muted ">Lorem ipsum dolor sit amet.</p>
-                            <input className="form-control form-control-lg" type="text"></input>
                             </div>
                         </div>
-                            
-                        <div className="row mx-4">
-                            <div className="col-10">
-                            <h1 className="display-6 mt-4">Escribe una descripción</h1>
-                            <p className="fs-4 fw-light text-muted ">Lorem ipsum dolor sit amet.</p>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+
+                        <div className="row mx-5 my-4 form-group">
+                            <div className="col-2">
+                                <h5 className="mt-2 fw-light align-center">Nombre</h5>
+                            </div>
+                            <div className="col-9">
+                                <input
+                                    id="nameInput" 
+                                    name="name" 
+                                    className="form-control form-control-md" 
+                                    type="text"
+                                    onChange={e => setInputName(e.target.value)}
+                                    value={inputName}
+                                    >
+                                </input>
+                                <p className="form-feedback fw-light">
+                                    El nombre tiene que tener como minimo 5 caracteres.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="row mx-5 my-4 form-group">
+                            <div className="col-2">
+                                <h5 className="mt-2 fw-light align-center">Descripción</h5>
+                            </div>
+                            <div className="col-9">
+                                <textarea
+                                    id="detailInput" 
+                                    name="detail" 
+                                    className="form-control"  
+                                    rows="7" 
+                                    onChange={e => setInputDetail(e.target.value)}
+                                    value={inputDetail}>   
+                                </textarea>
                             </div>
                         </div>
 
                         <div className="d-flex justify-content-center">
-                            <button onClick={()=>setStep(step + 1)} className="btn btn-success mt-4 fs-4 fw-light px-5">Siguiente</button>
+                            <button type="button" onClick={()=>setStep(step + 1)} className="btn btn-success mt-4 fs-4 fw-light px-5">Siguiente</button>
                         </div>
                     </>    
                 : null}
@@ -65,51 +150,85 @@ export const CreatePost = (props) => {
                     <>
                         <div className="row mx-4">
                             <div className="col-10">
-                                <h1 className="display-6 mt-2">Por ultimo, asignale caracteristicas</h1>
+                                <h1 className="display-6 mt-2">Asignale caracteristicas</h1>
                                 <p className="fs-4 fw-light text-muted ">Lorem ipsum dolor sit amet.</p>
                             </div>
                         </div>
-                
+
                         <div className="row mx-5 my-4 form-group">
-                            <div className="col-6 d-flex">
-                                <h5 className="mt-2 fw-light">Lugar</h5>
-                                <input className="form-control form-control-md mx-3" type="text"></input>
+                            <div className="col-3">
+                                <h5 className="mt-2 fw-light align-center">Lugar</h5>
                             </div>
-                            <div className="col-1 text-center"><h5 className="mt-2 fw-light">o</h5></div>
-                            <div className="col-3 d-flex">
-                                <h5 className="mt-2 fw-light">¿Online?</h5>
-                                <input className="form-control form-check-input mx-3 em2" type="checkbox"></input>
+                            <div className="col-4">
+                                <input 
+                                    name="location" 
+                                    disabled={online} 
+                                    className="form-control form-control-md" 
+                                    type="text"
+                                    onChange={e => setInputLocation(e.target.value)}
+                                    value={inputLocation}
+                                    ></input>
+                            </div>
+                            <div className="col-2">
+                                <h5 className="mt-2 fw-light align-center">¿Online?</h5>
+                            </div>
+                            <div className="col-1">
+                                <input name="online" onChange={changeOnline} className="form-control form-check-input em2" type="checkbox"></input>
                             </div>
                         </div>
-                
-                        <hr className="mx-5 my-2"/>
-                
+
+                        <hr/>
+
                         <div className="row mx-5 my-4 form-group">
-                            <div className="col-7 d-flex flex-column">
-                                <div className="d-flex mb-4">
-                                    <h5 className="mt-2 fw-light">Duración</h5>
-                                    <input className="form-control form-control-md mx-3" type="text"></input>
-                                    </div>
-                                    <div className="d-flex justify-content-center">
-                                    <h5 className="mt-2 fw-light">Fecha de Inicio</h5>
-                                    <input className="form-control form-control-md mx-3 w-50" type="text"></input>
-                                </div> 
+                            <div className="col-3">
+                                <h5 className="mt-2 fw-light align-center">Fecha de Inicio</h5>
                             </div>
-                
-                            <div className="col-1 text-center"><h5 className="mt-2 fw-light">o</h5></div>
-                
-                            <div className="col-4 d-flex">
-                                <h5 className="mt-2 fw-light">¿Siempre Disponible?</h5>
-                                <input className="form-control form-check-input mx-3 em2" type="checkbox"></input>
+                            <div className="col-4">
+                                <input
+                                    name="date" 
+                                    disabled={available} 
+                                    className="form-control form-control-md" 
+                                    type="date" 
+                                    onChange={e => setInputDate(e.target.value)}
+                                    value={inputDate}
+                                    ></input>
+                            </div>
+                            <div className="col-2">
+                                <h5 className="fw-light align-center">¿Siempre Disponible?</h5>
+                            </div>
+                            <div className="col-1">
+                                <input name="alwaysAvailable" onChange={changeAvailable} className="form-control form-check-input em2" type="checkbox"></input>
                             </div>
                         </div>
-                
-                        <hr className="mx-5 my-1"/>
-                        
-                        <div className="row mx-5 my-4 form-group d-flex">
-                            <div className="col-7 d-flex">
-                                <h5 className="mt-2 fw-light">Categoria</h5>
-                                <select class="form-control mx-3">
+
+                        <div className="row mx-5 my-3 form-group">
+                            <div className="col-3">
+                                <h5 className="mt-2 fw-light align-center">Duración</h5>
+                            </div>
+                            <div className="col-4">
+                                <input
+                                    name="duration" 
+                                    disabled={available} 
+                                    className="form-control form-control-md" 
+                                    type="text"
+                                    onChange={e => setInputDuration(e.target.value)}
+                                    value={inputDuration}></input>
+                            </div>
+                        </div>
+
+                        <hr/>
+
+                        <div className="row mx-5 my-4 form-group">
+                            <div className="col-3">
+                                <h5 className="mt-2 fw-light align-center">Categoria</h5>
+                            </div>
+
+                            <div className="col-4">
+                                <select
+                                    name="category" 
+                                    className="form-control"  
+                                    onChange={e => setInputCategory(e.target.value)}
+                                    value={inputCategory}>
                                 <option>Tecnologia</option>
                                 <option>Artes Culinarias</option>
                                 <option>Automotriz</option>
@@ -118,11 +237,12 @@ export const CreatePost = (props) => {
                                 </select>
                             </div>
                         </div>
-                
+
                         <div className="d-flex justify-content-center">
-                            <button onClick={()=>setStep(step + 1)} className="btn btn-success mt-4 fs-4 fw-light px-5">Finalizar</button>
+                            <button type="button" onClick={()=>setStep(step + 1)} className="btn btn-success mt-4 fs-4 fw-light px-5">Finalizar</button>
                         </div>
-                  </>    
+                       
+                    </>
                 : null}
 
                 {step === 3 ?
@@ -132,13 +252,14 @@ export const CreatePost = (props) => {
                             <p className="mx-4 fs-5 fw-light text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam bibendum dolor eget ornare. Curabitur vitae vulputate lorem.</p>
                         </div>
                         <div className="mb-4">
-                            <Link to="/curso/1">
+                            {/* <Link to="/curso/1">
                                 <button onClick={()=>setStep(step + 1)} className="btn btn-success fs-4 fw-light px-5">Ver mi publicación</button>
-                            </Link>
-                            
+                            </Link> */}
+                            <button type="button" onClick={() => actions.createPost(formData)} className="btn btn-success fs-4 fw-light px-5">Ver mi publicación</button>
                         </div>
                     </div>    
                 : null}
+                </form>
                 
                 
             </div>

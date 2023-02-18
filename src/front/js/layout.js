@@ -28,12 +28,9 @@ const Layout = () => {
         <ScrollToTop>
           <Navbar />
           <Routes>
-<<<<<<< HEAD
-          
+
             <Route element={<CreatePost />} path="/publicar" />
-=======
             <Route element={<Profile />} path="/profile" />
->>>>>>> c5d6f9422374dd3b43d600eb1c243d549cfc7a42
             <Route element={<Prueba />} path="/prueba" />
             <Route element={<Home />} path="/" />
             <Route element={<Courses />} path="/cursos" />
