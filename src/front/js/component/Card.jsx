@@ -18,10 +18,8 @@ export const Card = (props) => {
             bulk of the card's content.
           </p>
           <div className="card-button">
-            <Link to={`/${props.type}/1`}>
-              <a href="#" className="btn btn-primary">
-                Ver mas
-              </a>
+            <Link to={`/${props.type}/1`} className="btn btn-primary">
+              Ver mas
             </Link>
           </div>
         </div>

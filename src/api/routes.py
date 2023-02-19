@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Post
+from api.models import db, User, Post, Favorites
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -81,3 +81,16 @@ def create_event():
             print(error.args)
             db.session.rollback()
             return jsonify({"message": error.args})
+    
+@api.route('/favorites/<int:user_id>/<int:post_id>', methods=['POST'])
+def getfavorites(post_id=None, user_id=None):
+    if request.method =='POST':
+        if Favorites.query.filter_by(post_id=post_id, user_id=user_id ).first():
+            return jsonify ({'Message':'Favorite already exist'}), 400
+        else:
+            favorites = Favorites(user_id=user_id, post_id=post_id)
+            db.session.add(favorites)
+            db.session.commit()
+            return jsonify({'Message': 'Favorite has been added to user'}), 201
+
+        
