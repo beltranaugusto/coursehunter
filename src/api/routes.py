@@ -67,10 +67,13 @@ def create_event():
         duration = body.get('duration', None)
         certificate = body.get('certificate', None)
 
-        form_data = [user_id, name, detail, category, event, alwaysAvailable, location, online, date, duration, certificate]
+        form_data = [user_id, name, detail, category, event, alwaysAvailable, location, online, duration, certificate]
         for item in form_data:
             if item is None:
                 return jsonify({'message': "Form incomplete."}), 400
+
+        if date == "":
+            date = None
 
         post = Post(user_id=user_id, name=name, detail=detail, categories=category, event=event, alwaysAvailable=alwaysAvailable, location=location, online=online, date=date, duration=duration, certificate=certificate)
         db.session.add(post)
