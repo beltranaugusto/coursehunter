@@ -19,7 +19,7 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     publisherMode = db.Column(db.Boolean(), unique=False, nullable=False)
     publisherType = db.Column("publishertype",Enum(Publishertype), unique=False, nullable=False)
-    post = db.relationship("Post", backref= "user", lazy= True)
+    post = db.relationship("Post", backref="user", lazy=True)
      
     def __repr__(self):
         return f'<User {self.username}>'
@@ -42,7 +42,7 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, ForeignKey("user.id"), nullable=False)
     name = db.Column(db.String(200), unique=False, nullable=False)
     detail = db.Column(db.String(3000), unique=False, nullable=False)
-    categories = db.Column(db.Integer, ForeignKey("categories.id"), nullable=False)
+    categories = db.Column(db.String(200), ForeignKey("categories.name"), nullable=False)
     event= db.Column(db.Boolean(), unique=False, nullable=False)
     alwaysAvailable = db.Column(db.Boolean(), unique=False, nullable=False)
     location = db.Column(db.String(500), unique=False, nullable=True)
@@ -68,13 +68,12 @@ class Categories(db.Model):
     __tablename__ ="categories"
     id = db.Column(db.Integer, primary_key=True)
     post = db.relationship("Post", backref="categories_post", lazy=True)
-    name = db.Column(db.String(200), unique = False, nullable =False)
+    name = db.Column(db.String(200), unique=True, nullable=False)
 
     def serialize(self):
         return{
             "post": self.post,
             "name": self.name
-
         }
     
     def __repr__(self):
