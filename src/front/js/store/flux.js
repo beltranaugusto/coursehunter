@@ -4,6 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       urlBase: "http://localhost:3001/api",
+      postcourses: [],
+      postevents: [],
     },
     actions: {
       createPost: async (formData) => {
@@ -29,15 +31,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           let response = await fetch(`${getStore().urlBase}/courses`);
           let data = await response.json();
           console.log(data);
+          setStore({
+            postcourses: data,
+          });
         } catch (error) {
-          console.log(error);
+          console.log(`${error} error`);
         }
       },
       getPostEvents: async () => {
         try {
           let response = await fetch(`${getStore().urlBase}/events`);
           let data = await response.json();
-          console.log(data);
+          setStore({ postevents: data });
         } catch (error) {
           console.log(error);
         }

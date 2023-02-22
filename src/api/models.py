@@ -60,7 +60,7 @@ class Post(db.Model):
             "author": self.user_id,
             "name": self.name,
             "detail":self.detail,
-    
+            "id":self.id,
             "categories":self.categories 
             }
 
