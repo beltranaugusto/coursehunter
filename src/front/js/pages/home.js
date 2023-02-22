@@ -29,7 +29,7 @@ export const Home = () => {
         </div>
         <div className="col-6">
           <p className="text-center bg-light text-dark  fs-5">
-            Eventos <br></br>
+            Eventos <br />
             <a href="#" className="btn btn-secondary">
               Visitar
             </a>

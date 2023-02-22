@@ -35,7 +35,7 @@ class User(db.Model):
 
 
 class Post(db.Model):
-    __tablename__ ="post"
+   
 
     id = db.Column(db.Integer, primary_key = True)
 
@@ -60,7 +60,7 @@ class Post(db.Model):
             "author": self.user_id,
             "name": self.name,
             "detail":self.detail,
-    
+            "id":self.id,
             "categories":self.categories 
             }
 
@@ -79,4 +79,13 @@ class Categories(db.Model):
     def __repr__(self):
         return f'<Categories {self.name} >'
 
+
+class Favorites(db.Model):
+    __tablename__ = "favorites"
+    id = db.Column(db.Integer, primary_key= True)
+    user_id = db.Column(db.Integer, ForeignKey("user.id"))
+    post_id = db.Column(db.Integer, ForeignKey("post.id"))
+
+    def __repr__(self):
+        return f'<favorites {self.id}>'
 
