@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Card = (props) => {
+
+  console.log(props.type)
+
   return (
     <>
       <div className="card">
@@ -18,7 +21,7 @@ export const Card = (props) => {
             bulk of the card's content.
           </p>
           <div className="card-button">
-            <Link to={`/curso/1`} className="btn btn-primary">
+            <Link to={`/${props.type}/${props.data?.id}`} className="btn btn-primary">
               Ver mas
             </Link>
           </div>

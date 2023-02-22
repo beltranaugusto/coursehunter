@@ -20,6 +20,8 @@ class User(db.Model):
     publisherMode = db.Column(db.Boolean(), unique=False, nullable=False)
     publisherType = db.Column("publishertype",Enum(Publishertype), unique=False, nullable=False)
     post = db.relationship("Post", backref="user", lazy=True)
+    favorites = db.relationship("Favorites", backref="user", lazy = True)
+
      
     def __repr__(self):
         return f'<User {self.username}>'
@@ -51,6 +53,7 @@ class Post(db.Model):
     duration= db.Column(db.String(200), unique=False, nullable=False)
     certificate= db.Column(db.Boolean(), unique=False, nullable=False)
     creationDate = db.Column(db.DateTime(timezone=True), server_default=str(datetime.now()))
+    favorites = db.relationship("Favorites", backref="post", lazy = True)
 
     def __repr__(self):
         return f'<Post {self.name}>'
@@ -61,7 +64,13 @@ class Post(db.Model):
             "name": self.name,
             "detail":self.detail,
             "id":self.id,
-            "categories":self.categories 
+            "categories":self.categories,
+            "alwaysAvailable":self.alwaysAvailable,
+            "location": self.location,
+            "online": self.online,
+            "date": self.date,
+            "duration": self.duration,
+            "certificate": self.certificate 
             }
 
 class Categories(db.Model):

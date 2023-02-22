@@ -52,9 +52,7 @@ export const CreatePost = (props) => {
     } 
 
     useEffect(() => {
-        if (step == 0){
-            console.log("Step 1")
-       }
+        if (step == 0){console.log("Step 1")}
         if (step == 1){
             console.log("Step 2")
             if (inputName.length > 5 && inputDetail.length > 20){
@@ -292,7 +290,6 @@ export const CreatePost = (props) => {
                         <div className="d-flex justify-content-center">
                             <button type="button" onClick={()=>{setChange(change + 1)}} className="btn btn-success mt-4 fs-4 fw-light px-5">Finalizar</button>
                         </div>
-                       
                     </>
                 : null}
 
