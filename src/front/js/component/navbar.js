@@ -15,9 +15,6 @@ export const Navbar = () => {
           <Link to="/eventos">
             <button className="btn btn-primary mx-1">Eventos</button>
           </Link>
-          <Link to="/publicar">
-            <button className="btn btn-success mx-1">Publicar</button>
-          </Link>
         </div>
         
           

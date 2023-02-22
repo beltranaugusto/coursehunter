@@ -1,25 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Card } from "./Card.jsx";
 
 export const Categories = (props) => {
-  let type = props.type;
-  const { store, actions } = useContext(Context);
-  const { postcourses, postevents } = store;
-  console.log(postcourses);
-  let posts = [];
 
-  useEffect(() => {}, [postcourses])
-
-
-
-  if (props.type == "curso") {
-    posts = postcourses;
-  } else {
-    posts = postevents;
-  }
-
+  let type = props.type
 
   return (
     <>
@@ -27,9 +13,12 @@ export const Categories = (props) => {
         <div className="container container-categories">
           <h1>Categoria</h1>
           <div className="home-card-list">
-            {posts?.map((data) => (
-              <Card key={data.id} data={data} type={props.type}/>
-            ))}
+            <Card type={type} />
+            <Card type={type}/>
+            <Card type={type}/>
+            <Card type={type}/>
+            <Card type={type}/>
+            <Card type={type}/>
           </div>
         </div>
       </div>
