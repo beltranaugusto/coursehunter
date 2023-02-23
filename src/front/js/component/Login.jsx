@@ -17,10 +17,10 @@ export const Login = (props) => {
   };
 
   return (
-    // el token se esta guardando como undefined
     <>
       {token && token != "" && token != undefined ? (
-        actions.logout()
+        // si aparece undefined correr aqui actions.logout() //
+        "Estas en el sistema" + token
       ) : (
         <div className="container border rounded h-100 w-100 d-flex flex-column p-4">
           <form onSubmit={handleSubmit}>
