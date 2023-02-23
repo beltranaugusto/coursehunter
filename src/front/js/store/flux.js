@@ -1,7 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      token: null,
+      token: localStorage.getItem("token") || null,
+      user_id: "",
     },
     actions: {
       createPost: async (formData) => {
@@ -22,8 +23,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
-      createUser: async (formData) => {
-        fetch("http://127.0.0.1:3001/api/sign_up", {
+      createUser: (formData) => {
+        return fetch("http://127.0.0.1:3001/api/sign_up", {
           method: "POST",
           body: JSON.stringify(formData),
           headers: {
@@ -33,9 +34,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((result) => {
             console.log("Success:", result);
+            return true;
           })
           .catch((error) => {
             console.error("Error:", error);
+            return false;
           });
       },
 
@@ -59,11 +62,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (response.status !== 200) {
             console.error("Error:", error);
+            return false;
           }
           let data = await response.json();
 
-          localStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token });
+          localStorage.setItem("token", data.token);
+          setStore({ token: data.token });
+          setStore({ user_id: data.user_id });
+          return true;
         } catch (error) {
           console.log(error);
         }
@@ -71,22 +77,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       logout: () => {
         localStorage.removeItem("token");
         setStore({ token: null });
-      },
-
-      getHola: async () => {
-        const datos = {
-          headers: {
-            Authorization: "Bearer" + store.token,
-          },
-        };
-        fetch("http://127.0.0.1:3001/api/helloo", datos)
-          .then((response) => response.json())
-          .then((data) => {
-            setStore({ message: data.message });
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
       },
     },
   };

@@ -77,7 +77,7 @@ def sign_up():
             else:
                 password = generate_password_hash(password)
 
-                user = User(username=username, email=email, password=password, is_active=True, publisherMode=publisherMode, publisherType=publisherType, post=None)
+                user = User(username=username, email=email, password=password, is_active=True, publisherMode=publisherMode, publisherType=publisherType)
 
                 db.session.add(user)
                 try:

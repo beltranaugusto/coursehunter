@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Login } from "./Login.jsx";
+import { Context } from "../store/appContext";
+import { useEffect, useState } from "react";
 
 export const Navbar = () => {
+  const token = localStorage.getItem("token");
+  const { store, actions } = useContext(Context);
+
   return (
     <nav className="navbar navbar-light bg-transparent border">
       <div className="container">
@@ -20,9 +25,23 @@ export const Navbar = () => {
             <button className="btn btn-success mx-1">Publicar</button>
           </Link>
 
-          <Link to="/login">
-            <button className="btn btn-secondary mx-1">Ingresar</button>
-          </Link>
+          {token !== null ? (
+            <>
+              <Link to="/profile">
+                <button className="btn btn-success mx-1">Perfil</button>
+              </Link>
+              <button
+                className="btn btn-success mx-1"
+                onClick={() => actions.logout()}
+              >
+                Salir
+              </button>
+            </>
+          ) : (
+            <Link to="/login">
+              <button className="btn btn-secondary mx-1">Ingresar</button>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

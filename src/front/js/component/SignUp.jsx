@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const SignUp = (props) => {
@@ -10,11 +10,19 @@ export const SignUp = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [publisherMode, setPublisherMode] = useState(false);
-  const [publisherType, setPublisherType] = useState("");
+  const [publisherType, setPublisherType] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    actions.createUser(formData);
+    const signup = await actions.createUser(formData);
+    if (signup) {
+      setErrorMessage(false);
+      navigate("/login");
+    } else {
+      setErrorMessage(true);
+    }
   };
 
   useEffect(() => {
@@ -31,6 +39,13 @@ export const SignUp = (props) => {
   return (
     <>
       <div className="container border rounded h-100 w-100 d-flex flex-column p-4">
+        <div className="col-5 mx-auto">
+          {errorMessage && (
+            <div className="alert alert-danger" role="alert">
+              Datos incorrectos o usuario ya existente, intente nuevamente
+            </div>
+          )}
+        </div>
         <form onSubmit={handleSubmit}>
           <div className="col-5 mx-auto">
             <label htmlFor="usernameInput" className="form-label">
@@ -97,18 +112,14 @@ export const SignUp = (props) => {
                 value={publisherType}
               >
                 <option value="">Selecciona una opción</option>
-                <option value="universidad">Universidad</option>
-                <option value="academia">Academia</option>
+                <option value="university">Universidad</option>
+                <option value="academy">Academia</option>
               </select>
             </div>
           )}
 
           <div className="col-5 mx-auto">
-            <button
-              type="submit"
-              onClick={() => actions.createUser(formData)}
-              className="btn btn-primary"
-            >
+            <button type="submit" className="btn btn-primary">
               Registrarme
             </button>
           </div>

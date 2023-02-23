@@ -18,7 +18,7 @@ class User(db.Model):
     password = db.Column(db.String(280), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     publisherMode = db.Column(db.Boolean(), unique=False, nullable=False)
-    publisherType = db.Column("publishertype",Enum(Publishertype), unique=False, nullable=False)
+    publisherType = db.Column("publishertype",Enum(Publishertype), unique=False, nullable=True)
     post = db.relationship("Post", backref= "user", lazy= True)
      
     def __repr__(self):
