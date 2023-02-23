@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Login } from "./Login.jsx";
 
 export const Navbar = () => {
   return (
@@ -18,10 +19,11 @@ export const Navbar = () => {
           <Link to="/publicar">
             <button className="btn btn-success mx-1">Publicar</button>
           </Link>
+
+          <Link to="/login">
+            <button className="btn btn-secondary mx-1">Ingresar</button>
+          </Link>
         </div>
-        
-          
-        
       </div>
     </nav>
   );
