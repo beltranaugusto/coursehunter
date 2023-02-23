@@ -10,11 +10,16 @@ export const Categories = (props) => {
   console.log(postcourses);
   let posts = [];
 
+  useEffect(() => {}, [postcourses])
+
+
+
   if (props.type == "curso") {
     posts = postcourses;
   } else {
     posts = postevents;
   }
+
 
   return (
     <>
@@ -23,7 +28,7 @@ export const Categories = (props) => {
           <h1>Categoria</h1>
           <div className="home-card-list">
             {posts?.map((data) => (
-              <Card key={data.id} data={data} />
+              <Card key={data.id} data={data} type={props.type}/>
             ))}
           </div>
         </div>
