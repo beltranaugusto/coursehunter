@@ -8,10 +8,11 @@ export const Categories = (props) => {
 
   const { store, actions } = useContext(Context);
   const { postcourses, postevents } = store;
-  console.log(postcourses);
-  let posts = [];
 
-  useEffect(() => {}, [postcourses])
+
+  let posts = [];
+  useEffect(() => {}, [postcourses]);
+
 
   if (props.type == "curso") {
     posts = postcourses;
@@ -27,7 +28,7 @@ export const Categories = (props) => {
           <div className="home-card-list">
 
             {posts?.map((data) => (
-              <Card key={data.id} data={data} type={props.type}/>
+              <Card key={data.id} data={data} type={props.type} />
             ))}
 
           </div>

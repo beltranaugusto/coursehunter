@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Card = (props) => {
-
-  console.log(props.type)
+  const { store, actions } = useContext(Context);
 
   return (
     <>
@@ -21,9 +20,23 @@ export const Card = (props) => {
             bulk of the card's content.
           </p>
           <div className="card-button">
-            <Link to={`/${props.type}/${props.data?.id}`} className="btn btn-primary">
+            <Link
+              to={`/${props.type}/${props.data?.id}`}
+              className="btn btn-primary"
+            >
               Ver mas
             </Link>
+            <button
+              type="button"
+              className="btn w-80"
+              onClick={() => {
+                {
+                  actions.addCard(props.data.id, 1);
+                }
+              }}
+            >
+              <i className="fas fa-heart"></i>
+            </button>
           </div>
         </div>
       </div>
