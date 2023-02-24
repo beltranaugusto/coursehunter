@@ -86,14 +86,30 @@ def create_event():
             return jsonify({"message": error.args})
     
 @api.route('/favorites/<int:user_id>/<int:post_id>', methods=['POST'])
-def getfavorites(post_id=None, user_id=None):
+def postfavorites(post_id=None, user_id=None):
     if request.method =='POST':
         if Favorites.query.filter_by(post_id=post_id, user_id=user_id ).first():
-            return jsonify ({'Message':'Favorite already exist'}), 400
+            favorites = Favorites.query.filter_by(post_id=post_id, user_id=user_id ).first()
+            db.session.delete(favorites)
+            db.session.commit()
+            return jsonify ({'Message':'Favorite has been deleted'}), 200
         else:
             favorites = Favorites(user_id=user_id, post_id=post_id)
             db.session.add(favorites)
             db.session.commit()
             return jsonify({'Message': 'Favorite has been added to user'}), 201
 
-        
+@api.route('/favorites/<int:user_id>', methods=['GET'])
+def gettingfavorites(user_id=None):
+    if request.method == 'GET':
+        favorites = Favorites.query.filter_by(user_id=user_id).all()
+        print(favorites)
+        favorites_list =[]
+        for favorite in favorites:
+            favorites_list.append(favorite.serialize())
+
+        return jsonify(favorites_list), 200
+
+    
+
+

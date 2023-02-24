@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       urlBase: "http://localhost:3001/api",
       postcourses: [],
       postevents: [],
+      favorites: [],
     },
     actions: {
       createPost: async (formData) => {
@@ -30,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           let response = await fetch(`${getStore().urlBase}/courses`);
           let data = await response.json();
-          console.log(data);
+
           setStore({
             postcourses: data,
           });
@@ -46,6 +47,27 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
         }
+      },
+      addCard: (post_id, user_id) => {
+        // let fav = getStore().favorites.some((item) => item.id == favorites.id);
+        // if (!fav) {
+        //   setStore({
+        //     favorites: [...getStore().favorites, favorites],
+        //   });
+        // }
+        fetch(`http://127.0.0.1:3001/api/favorites/${user_id}/${post_id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((result) => {
+            console.log("Success:", result);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       },
     },
   };
