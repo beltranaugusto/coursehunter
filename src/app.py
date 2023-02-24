@@ -3,6 +3,8 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_cors import CORS
@@ -28,6 +30,8 @@ else:
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db, compare_type = True)
+app.config['JWT_SECRET_KEY']=os.getenv('FLASK_APP_KEY')
+jwt = JWTManager(app)
 db.init_app(app)
 
 # Allow CORS requests to this API

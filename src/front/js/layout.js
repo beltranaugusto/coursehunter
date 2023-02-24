@@ -12,6 +12,8 @@ import { Profile } from "./pages/profile.jsx";
 import { CourseDetail } from "./pages/CourseDetail.jsx";
 import { CreatePost } from "./component/CreatePost.jsx";
 import { EventDetail } from "./pages/EventDetail.jsx";
+import { Login } from "./component/Login.jsx";
+import { SignUp } from "./component/SignUp.jsx";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
@@ -35,7 +37,8 @@ const Layout = () => {
             <Route element={<Events />} path="/eventos" />
             <Route element={<CourseDetail />} path="/curso/:id" />
             <Route element={<EventDetail />} path="/evento/:id" />
-
+            <Route element={<SignUp />} path="/sign_up" />
+            <Route element={<Login />} path="/login" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>

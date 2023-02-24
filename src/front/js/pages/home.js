@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { Card } from "../component/Card.jsx";
@@ -7,17 +7,19 @@ import "../../styles/home.css";
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
+  useEffect(() => {});
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-12">
-          <p className="text-center bg-light text-dark fs-5">
+          {/* <p className="text-center bg-light text-dark fs-5">
             Página web para busca cursos y eventos disponibles relacionados con
             aprendizaje y formación personal, profesional y académica dentro del
             territorio venezolano. Ofrecemos una plataforma donde los educadores
             pueden publicar sus cursos o eventos para estudiantes interesados en
             adquirir nuevos conocimientos dentro de distintas categorías.
-          </p>
+          </p> */}
         </div>
         <div className="col-6">
           <p className="text-center bg-light text-dark fs-5">

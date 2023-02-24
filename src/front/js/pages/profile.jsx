@@ -17,15 +17,15 @@ export const Profile = () => {
             />
           </div>
           <div className="col-12 col-md-9 mb-2 p-0 border border-3">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
+            <div className="card-body">
+              <h5 className="card-title">Card title</h5>
+              <p className="card-text">
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
                 longer.
               </p>
-              <p class="card-text">
-                <small class="text-muted">Last updated 3 mins ago</small>
+              <p className="card-text">
+                <small className="text-muted">Last updated 3 mins ago</small>
               </p>
             </div>
           </div>
@@ -40,7 +40,7 @@ export const Profile = () => {
             <h1>Feedback</h1>
             <div className="comment">
               <input placeholder="Introduce tu comentario"></input>
-              <button type="button" class="btn btn-outline-success">
+              <button type="button" className="btn btn-outline-success">
                 Success
               </button>
             </div>
