@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { SearchBar } from "../tools/searchBar";
 import { Categories } from "../component/Categories.jsx";
 
@@ -8,7 +8,12 @@ import "../../styles/CourseDetail.css";
 import { Context } from "../store/appContext";
 
 export const CourseDetail = () => {
+
   const { store, actions } = useContext(Context);
+  const params = useParams();
+
+  const { postcourses } = store;
+  const course = postcourses.find(post => post.id == params.id)
 
   return (
     <>
@@ -16,7 +21,7 @@ export const CourseDetail = () => {
         <div className="d-flex flex-column left-col">
           <div className="container">
             <h2 className="display-5 text-center border rounded p-4">
-              Curso de Python
+              {course?.name}
             </h2>
             <img
               className="w-100 border rounded mt-2"
@@ -27,18 +32,7 @@ export const CourseDetail = () => {
           <div className="container mt-4">
             <div className="border rounded p-4">
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere
-                accusamus incidunt dolorem neque, deleniti suscipit at libero
-                quidem voluptates ullam, molestias iure odio sunt recusandae
-                debitis praesentium aliquid maiores beatae. Lorem ipsum dolor
-                sit amet, consectetur adipisicing elit. Facere accusamus
-                incidunt dolorem neque, deleniti suscipit at libero quidem
-                voluptates ullam, molestias iure odio sunt recusandae debitis
-                praesentium aliquid maiores beatae. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Facere accusamus incidunt dolorem
-                neque, deleniti suscipit at libero quidem voluptates ullam,
-                molestias iure odio sunt recusandae debitis praesentium aliquid
-                maiores beatae.
+                {course?.detail}
               </p>
             </div>
           </div>
@@ -46,28 +40,30 @@ export const CourseDetail = () => {
 
         <div className="right-col">
           <div className="h-100 border rounded p-4 d-flex flex-column justify-content-between">
-            <p>
-              <strong>1.</strong> Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit.
-              <br />
-              <strong>2.</strong> Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit.
-              <br />
-              <strong>3.</strong> Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit.
-              <br />
-              <strong>4.</strong> Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit.
-              <br />
-            </p>
-            <Link to="/">
-              <button className="btn btn-primary w-100">
-                Solicitar Informacion
+            <ul className="list-group">
+              {course?.categories ? <li className="list-group-item"><strong>Categoria: </strong>{course?.categories}</li> : null}
+              {course?.online ? <li className="list-group-item"><strong>Online: </strong>Sí</li> : <li className="list-group-item"><strong>Online: </strong>No</li>}
+              {course?.alwaysAvailable ? <li className="list-group-item"><strong>Siempre Disponible: </strong>Sí</li> : null}
+              {course?.location ? <li className="list-group-item"><strong>Lugar: </strong>{course?.location}</li> : null}
+              {course?.date ? <li className="list-group-item"><strong>Fecha: </strong>{course?.date}</li> : null}
+              {course?.duration ? <li className="list-group-item"><strong>Duración: </strong>{course?.duration}</li> : null}
+              {course?.certificate ? <li className="list-group-item"><strong>Certificado: </strong>Sí</li> : null}
+              
+            </ul>
+            <div className="buttons d-flex flex-column">
+              <Link to="/">
+                <button className="btn btn-primary w-100">
+                  Solicitar Informacion
+                </button>
+              </Link>
+              <button type="button" className="btn w-100">
+                <i className="fas fa-heart"></i>
               </button>
-            </Link>
+            </div>
           </div>
         </div>
       </div>
     </>
   );
 };
+

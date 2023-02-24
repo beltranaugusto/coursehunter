@@ -18,8 +18,9 @@ class User(db.Model):
     password = db.Column(db.String(280), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     publisherMode = db.Column(db.Boolean(), unique=False, nullable=False)
-    publisherType = db.Column("publishertype",Enum(Publishertype), unique=False, nullable=True)
-    post = db.relationship("Post", backref= "user", lazy= True)
+    publisherType = db.Column("publishertype",Enum(Publishertype), unique=False, nullable=False)
+    post = db.relationship("Post", backref="user", lazy=True)
+    favorites = db.relationship("Favorites", backref="user", lazy = True)
      
     def __repr__(self):
         return f'<User {self.username}>'
@@ -35,14 +36,14 @@ class User(db.Model):
 
 
 class Post(db.Model):
-    __tablename__ ="post"
+   
 
     id = db.Column(db.Integer, primary_key = True)
 
     user_id = db.Column(db.Integer, ForeignKey("user.id"), nullable=False)
     name = db.Column(db.String(200), unique=False, nullable=False)
     detail = db.Column(db.String(3000), unique=False, nullable=False)
-    categories = db.Column(db.Integer, ForeignKey("categories.id"), nullable=False)
+    categories = db.Column(db.String(200), ForeignKey("categories.name"), nullable=False)
     event= db.Column(db.Boolean(), unique=False, nullable=False)
     alwaysAvailable = db.Column(db.Boolean(), unique=False, nullable=False)
     location = db.Column(db.String(500), unique=False, nullable=True)
@@ -51,6 +52,7 @@ class Post(db.Model):
     duration= db.Column(db.String(200), unique=False, nullable=False)
     certificate= db.Column(db.Boolean(), unique=False, nullable=False)
     creationDate = db.Column(db.DateTime(timezone=True), server_default=str(datetime.now()))
+    favorites = db.relationship("Favorites", backref="post", lazy = True)
 
     def __repr__(self):
         return f'<Post {self.name}>'
@@ -60,24 +62,38 @@ class Post(db.Model):
             "author": self.user_id,
             "name": self.name,
             "detail":self.detail,
-    
-            "categories":self.categories 
+            "id":self.id,
+            "categories":self.categories,
+            "alwaysAvailable":self.alwaysAvailable,
+            "location": self.location,
+            "online": self.online,
+            "date": self.date,
+            "duration": self.duration,
+            "certificate": self.certificate 
             }
 
 class Categories(db.Model):
     __tablename__ ="categories"
     id = db.Column(db.Integer, primary_key=True)
     post = db.relationship("Post", backref="categories_post", lazy=True)
-    name = db.Column(db.String(200), unique = False, nullable =False)
+    name = db.Column(db.String(200), unique=True, nullable=False)
 
     def serialize(self):
         return{
             "post": self.post,
             "name": self.name
-
         }
     
     def __repr__(self):
         return f'<Categories {self.name} >'
 
+
+class Favorites(db.Model):
+    __tablename__ = "favorites"
+    id = db.Column(db.Integer, primary_key= True)
+    user_id = db.Column(db.Integer, ForeignKey("user.id"))
+    post_id = db.Column(db.Integer, ForeignKey("post.id"))
+
+    def __repr__(self):
+        return f'<favorites {self.id}>'
 
