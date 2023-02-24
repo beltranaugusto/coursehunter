@@ -75,6 +75,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           setStore({ token: data.token });
           setStore({ user_id: data.user_id });
           return true;
+        } catch (error) {
+          console.log(error);
+        }
+      },
+
       getPostCourses: async () => {
         try {
           let response = await fetch(`${getStore().urlBase}/courses`);
@@ -87,6 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(`${error} error`);
         }
       },
+
       getPostEvents: async () => {
         try {
           let response = await fetch(`${getStore().urlBase}/events`);
@@ -117,15 +123,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => {
             console.error("Error:", error);
           });
-         },
-
+        },
 
       logout: () => {
         localStorage.removeItem("token");
         setStore({ token: null });
-      
-    },
-  };
+    }
+
+    }
+  }
 };
 
 export default getState;
