@@ -23,17 +23,15 @@ class User(db.Model):
     favorites = db.relationship("Favorites", backref="user", lazy = True)
      
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<User {self.email}>'
 
     def serialize(self):
         return {
             "id": self.id,
-            "user": self.username,
             "email": self.email,
             "publisherMode": self.publisherMode,
             
         }
-
 
 class Post(db.Model):
    
