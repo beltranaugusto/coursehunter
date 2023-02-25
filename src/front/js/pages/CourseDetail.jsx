@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { SearchBar } from "../tools/searchBar";
-import { Categories } from "../component/Categories.jsx"
+import { Categories } from "../component/Categories.jsx";
 
 import "../../styles/CourseDetail.css";
 
@@ -103,9 +103,7 @@ export const CourseDetail = () => {
           </div>
         </div>
       </div>
-
-
-  </> 
+    </>
   );
 };
 
