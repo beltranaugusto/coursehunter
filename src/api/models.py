@@ -1,15 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Enum, ForeignKey
-from datetime import datetime
-import enum
-db = SQLAlchemy()
 
-class Publishertype(enum.Enum):
-    university = "Universidad/Instituto"
-    academy = "Academia"
-    company = "Compania"
-    independent = "Independiente"
-    other = "Otro"
+db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,17 +14,15 @@ class User(db.Model):
     favorites = db.relationship("Favorites", backref="user", lazy = True)
      
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<User {self.email}>'
 
     def serialize(self):
         return {
             "id": self.id,
-            "user": self.username,
             "email": self.email,
             "publisherMode": self.publisherMode,
             
         }
-
 
 class Post(db.Model):
    
