@@ -1,6 +1,15 @@
 from flask_sqlalchemy import SQLAlchemy
-
+from sqlalchemy import Enum, ForeignKey
+from datetime import datetime
+import enum
 db = SQLAlchemy()
+
+class Publishertype(enum.Enum):
+    university = "Universidad/Instituto"
+    academy = "Academia"
+    company = "Compania"
+    independent = "Independiente"
+    other = "Otro"
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
