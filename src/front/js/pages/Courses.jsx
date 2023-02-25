@@ -5,9 +5,8 @@ import { Categories } from "../component/Categories.jsx";
 
 import { Context } from "../store/appContext";
 
-export const Courses = (props) => {
+export const Courses = () => {
   const { store, actions } = useContext(Context);
-  let type = props.type;
 
   return (
     <>
@@ -19,8 +18,8 @@ export const Courses = (props) => {
 
         {/* Lorman - Categorias */}
         <div>
-          <Categories type="curso" />
-          <Categories type="curso" />
+          <Categories type="curso" keyword="Hola" />
+          {/* <Categories type="curso"/> */}
         </div>
 
         <div className="d-flex justify-content-end w-100">
