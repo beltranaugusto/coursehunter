@@ -22,6 +22,10 @@ const injectContext = (PassedComponent) => {
     );
 
     useEffect(() => {
+
+      let user_id = state.store.user_id
+
+      state.actions.getUser(user_id);
       state.actions.getPostCourses();
       state.actions.getPostEvents();
     }, []);

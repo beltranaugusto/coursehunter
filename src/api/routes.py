@@ -39,6 +39,17 @@ def getting_users():
 
         return jsonify(users_list), 200
     
+@api.route('/user/<int:user_id>', methods=['GET'])
+def get_user(user_id=None):
+    if request.method =='GET':
+        user = User.query.filter_by(id=user_id).first()
+        if user:
+            return jsonify(user.serialize()), 200
+        else:
+            return jsonify({'message': "User with that id doesn't exist"}), 400
+
+        
+    
 @api.route('/login', methods=['POST'])
 def login():
     if request.method =='POST':

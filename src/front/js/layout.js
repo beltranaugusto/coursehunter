@@ -30,7 +30,7 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route element={<CreatePost />} path="/publicar" />
-            <Route element={<Profile />} path="/profile" />
+            <Route element={<Profile />} path="/profile/:id" />
             <Route element={<Prueba />} path="/prueba" />
             <Route element={<Home />} path="/" />
             <Route element={<Courses />} path="/cursos" />

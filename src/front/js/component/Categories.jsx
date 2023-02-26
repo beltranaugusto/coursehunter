@@ -11,7 +11,7 @@ export const Categories = (props) => {
 
 
   let posts = [];
-  useEffect(() => {}, [postcourses]);
+  useEffect(() => {}, []);
 
 
   if (props.type == "curso") {
