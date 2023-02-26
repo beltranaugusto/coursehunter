@@ -4,10 +4,12 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       token: localStorage.getItem("token") || null,
-      user_id: "",
+      user_id: localStorage.getItem("user_id") || "",
       urlBase: "http://localhost:3001/api",
       postcourses: [],
       postevents: [],
+      userData: [],
+      tempUserData: [],
 
     },
     actions: {
@@ -73,7 +75,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           localStorage.setItem("token", data.token);
           setStore({ token: data.token });
+          localStorage.setItem("user_id", data.user_id);
           setStore({ user_id: data.user_id });
+
+          getActions().getUser(data.user_id);
+
           return true;
         } catch (error) {
           console.log(error);
@@ -127,8 +133,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       logout: () => {
         localStorage.removeItem("token");
-        setStore({ token: null });
-    }
+        localStorage.removeItem("user_id");
+        setStore({ token: null, user_id: "" });
+    },
+
+    // Hay dos rutas para obtener un usuario, las dos hacen la misma consulta al api.
+    // Pero, esta, getUser, settea en el store lo que obtiene
+    // Esta es usada a la hora de loggearse
+    getUser: async (user_id) => {
+      try {
+        let response = await fetch(`${getStore().urlBase}/user/${user_id}`);
+        let data = await response.json();
+        setStore({ userData: data });
+
+        
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    // Mientras que esta solo devuelve la informacion.
+    // Esta es usada en cualquier lugar que necesitemos la informacion de un usuario en especifico, como entrar al perfil de un usuario.
+    getUserAlt: async (user_id) => {
+      try {
+        let response = await fetch(`${getStore().urlBase}/user/${user_id}`);
+        let data = await response.json();
+        console.log(data)
+        setStore({ tempUserData: data });
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     }
   }

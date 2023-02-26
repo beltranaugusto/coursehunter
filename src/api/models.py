@@ -21,15 +21,35 @@ class User(db.Model):
     publisherType = db.Column("publishertype",Enum(Publishertype), unique=False, nullable=False)
     post = db.relationship("Post", backref="user", lazy=True)
     favorites = db.relationship("Favorites", backref="user", lazy = True)
+
+    
+    
      
     def __repr__(self):
         return f'<User {self.email}>'
 
     def serialize(self):
+
+        posts = []
+        favorites = []
+
+        for item in self.post:
+            posts.append(item.id)
+
+        for item in self.favorites:
+            favorites.append(item.id)
+
         return {
             "id": self.id,
+            "username": self.username,
             "email": self.email,
+            "is_active": self.is_active,
             "publisherMode": self.publisherMode,
+            "post": posts,
+            "favorites": favorites,
+            "publisherType": self.publisherType.value
+            
+            
             
         }
 

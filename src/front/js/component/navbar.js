@@ -21,14 +21,15 @@ export const Navbar = () => {
           <Link to="/eventos">
             <button className="btn btn-primary mx-1">Eventos</button>
           </Link>
-          <Link to="/publicar">
-            <button className="btn btn-success mx-1">Publicar</button>
-          </Link>
+          
 
           {token !== null ? (
             <>
-              <Link to="/profile">
-                <button className="btn btn-success mx-1">Perfil</button>
+              <Link to="/publicar">
+                <button className="btn btn-success mx-1">Publicar</button>
+              </Link>
+              <Link to={"/profile/" + store.user_id}>
+                <button className="btn btn-success mx-1">Mi Perfil</button>
               </Link>
               <button
                 className="btn btn-success mx-1"
