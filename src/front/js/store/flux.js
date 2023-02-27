@@ -24,6 +24,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((response) => response.json())
           .then((result) => {
+            getActions().getPostCourses()
+            getActions().getPostEvents()
             console.log("Success:", result);
           })
           .catch((error) => {
@@ -110,12 +112,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       addCard: (post_id, user_id) => {
-        // let fav = getStore().favorites.some((item) => item.id == favorites.id);
-        // if (!fav) {
-        //   setStore({
-        //     favorites: [...getStore().favorites, favorites],
-        //   });
-        // }
         fetch(`http://127.0.0.1:3001/api/favorites/${user_id}/${post_id}`, {
           method: "POST",
           headers: {
@@ -124,6 +120,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then((response) => response.json())
           .then((result) => {
+            getActions().getUser(user_id)
             console.log("Success:", result);
           })
           .catch((error) => {
@@ -169,6 +166,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       try {
         let response = await fetch(`${getStore().urlBase}/post_email/${user_id}/${publisher_id}/${post_id}`, {method: "GET"});
         let data = await response.json();
+        getActions().getUser(user_id)
         console.log(data)
       } catch (error) {
         console.log(error);
