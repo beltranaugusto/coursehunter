@@ -12,7 +12,7 @@ export const Events = () => {
     <>
       <div className="container border rounded mt-5 h-100 w-100 d-flex justify-content-end flex-column p-4">
         <div className="d-flex justify-content-between w-100">
-          <h3>Eventos</h3>
+        <h1 className="display-5 mx-5 my-4">Eventos</h1>
           <SearchBar />
         </div>
 
