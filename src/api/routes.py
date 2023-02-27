@@ -1,11 +1,12 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+import smtplib
+from email.message import EmailMessage
 from flask import Flask, request, jsonify, url_for, Blueprint
-
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import generate_password_hash, check_password_hash
-from api.models import db, User, Post, Favorites
+from api.models import db, User, Post, Favorites, AskedInfo
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -139,6 +140,7 @@ def create_event():
         date = body.get('date', None)
         duration = body.get('duration', None)
         certificate = body.get('certificate', None)
+        author_name = body.get('author_name', None)
 
         form_data = [user_id, name, detail, category, event, alwaysAvailable, location, online, duration, certificate]
         for item in form_data:
@@ -148,7 +150,7 @@ def create_event():
         if date == "":
             date = None
 
-        post = Post(user_id=user_id, name=name, detail=detail, categories=category, event=event, alwaysAvailable=alwaysAvailable, location=location, online=online, date=date, duration=duration, certificate=certificate)
+        post = Post(user_id=user_id, name=name, detail=detail, categories=category, event=event, alwaysAvailable=alwaysAvailable, location=location, online=online, date=date, duration=duration, certificate=certificate, author_name=author_name)
         db.session.add(post)
         try:
             db.session.commit()
@@ -193,5 +195,99 @@ def gettingfavorites(user_id=None):
 
         return jsonify(favorites_list), 200
 
-    
+
+@api.route('/post_email/<int:user_id>/<int:publisher_id>/<int:post_id>', methods=['GET'])
+def post_email(user_id=None, publisher_id=None, post_id=None):
+    if request.method == 'GET':
+        asked = User.query.filter_by(id=publisher_id).first()
+        asking = User.query.filter_by(id=user_id).first()
+        post = Post.query.filter_by(id=post_id).first()
+
+        email = EmailMessage()
+        email['Subject'] = 'CourseHunter: %s solicitó información acerca de tu curso %s' % (asking.username, post.name)
+        email['From'] = 'coursehunter.info@gmail.com'
+        email['To'] = asked.email
+        email['reply-to'] = asking.email
+
+        print("Email to: " + asked.email, "From: " + asking.email)
+
+        email.set_content("""\
+                    <html>
+                    <head>
+                    <style>
+                        body{
+                            font-family:"Segoe UI";
+                            color: #313638 !important;
+                        }
+                        
+                        h1{
+                            font-weight: 300;
+                            padding-bottom: 5px;
+                        }
+                        .correo {
+                            max-width: 800px;
+                            border: 1px solid black;
+                            border-radius: 15px;
+                            margin: 20px;
+                            padding: 40px 60px 40px 60px;
+                        }
+                        .titulo {
+                            border-bottom: 1px solid black;
+                            display: inline-block;
+                        }
+                        .responde {
+                            font-size: 1.5em;
+                            font-weight: 400;
+                        }
+                        .nombre {
+                            display: inline-block;
+                            font-size: 1.5em;
+                            font-weight: 300;
+                        }
+                        .m-r {
+                            margin-right: 5px;
+                        }
+                        .m-l {
+                            margin-left: 5px;
+                        }
+                        .m-t {
+                            margin-top: 1.75em;
+                        }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="correo">
+                            <h1 class="titulo">CourseHunter</h1>
+                            <p>
+                                <div class="nombre m-r">%s</div> solicitó información acerca de tu publicación: <div class="nombre m-r m-l">%s</div>.
+                            </p>
+                            <p class="responde m-t">
+                                Responde este correo para contactarte con el interesado.
+                            </p>
+                        </div>
+                    </body>
+                    </html>
+                """ % (asking.username, post.name), subtype='html')
+
+        try:
+            server = smtplib.SMTP("smtp.gmail.com", 587)
+            server.starttls()
+            # Convertir la contraseña en una variable de entorno.
+            server.login("coursehunter.info@gmail.com", "turwmvocjyksgsdw")
+            server.send_message(email)
+            server.quit()
+            print("Email sent", )
+
+            askedInfo = AskedInfo(user_id=user_id, post_id=post_id)
+            db.session.add(askedInfo)
+            db.session.commit() 
+
+            return jsonify({"message": "Email sent succesfully."}), 200
+
+        except Exception as error:
+            print(error)
+            return jsonify({"message": "Error, try again"}), 500
+            
+        
+        
 

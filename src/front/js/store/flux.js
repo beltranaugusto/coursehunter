@@ -165,6 +165,16 @@ const getState = ({ getStore, getActions, setStore }) => {
       }
     },
 
+    askInformation: async (user_id, publisher_id, post_id) => {
+      try {
+        let response = await fetch(`${getStore().urlBase}/post_email/${user_id}/${publisher_id}/${post_id}`, {method: "GET"});
+        let data = await response.json();
+        console.log(data)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     }
   }
 };

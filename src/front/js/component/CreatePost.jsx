@@ -15,7 +15,7 @@ import "../../styles/CreatePost.css";
 
 export const CreatePost = (props) => {
 
-    const { actions } = useContext(Context);
+    const { actions, store } = useContext(Context);
 
     const [change, setChange] = useState(0)
     const [step, setStep] = useState(0)
@@ -92,23 +92,26 @@ export const CreatePost = (props) => {
             }
             
         
+            setFormData(prevFormData => ({...prevFormData, "user_id": store.user_id})); 
+
         //Cableado
-            setFormData(prevFormData => ({...prevFormData, "user_id": 1}));   
             setFormData(prevFormData => ({...prevFormData, "certificate": true}));   
+            setFormData(prevFormData => ({...prevFormData, "author_name": store.userData.username}));   
         }
     }, [change])
 
 
     return (
         <>
-            <div className="container"><h1 className="display-4 mx-5 my-4">Crear Publicación</h1></div>
-            <div className="container border rounded h-100 w-100 d-flex flex-column p-4 create-post">
+            
+            <div className="container border rounded h-100 w-100 d-flex flex-column mt-5 p-4 create-post">
+            
 
                 <form>
                 {step === 0 ?
                     <>
-                        <h1 className="display-6 mx-4 mt-2">Elige que tipo de publicación será</h1>
-                        <p className="mx-4 fs-4 fw-light text-muted ">Lorem ipsum dolor sit amet.</p>
+                        <h1 className="display-6 mx-4 mt-2">Crea una publicación</h1>
+                        <p className="mx-4 fs-4 fw-light text-muted ">Elige que tipo de publicación será.</p>
                         <div className="container mt-4 d-flex justify-content-center">
                             <div className="container mx-2 py-4 border rounded text-center fw-light post-choice">
                                 <h2 className="mb-3 fw-light">Cursos</h2>

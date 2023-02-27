@@ -24,7 +24,6 @@ export const Categories = (props) => {
     <>
       <div className="home">
         <div className="container container-categories">
-          <h1>Categoria</h1>
           <div className="home-card-list">
 
             {posts?.map((data) => (
