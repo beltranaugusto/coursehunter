@@ -1,6 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+import os
 import smtplib
 from email.message import EmailMessage
 from flask import Flask, request, jsonify, url_for, Blueprint
@@ -11,7 +12,7 @@ from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
-
+email_key = os.getenv("EMAIL_KEY")
 
 def set_password(password):
     return generate_password_hash(password)
@@ -273,7 +274,7 @@ def post_email(user_id=None, publisher_id=None, post_id=None):
             server = smtplib.SMTP("smtp.gmail.com", 587)
             server.starttls()
             # Convertir la contraseña en una variable de entorno.
-            server.login("coursehunter.info@gmail.com", "turwmvocjyksgsdw")
+            server.login("coursehunter.info@gmail.com", email_key)
             server.send_message(email)
             server.quit()
             print("Email sent", )
