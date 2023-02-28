@@ -52,7 +52,7 @@ class User(db.Model):
             "post": posts,
             "favorites": favorites,
             "askedInfo": askedInfo,
-            "publisherType": self.publisherType,
+            "publisherType": self.publisherType.value,
             "img_url": self.img_url,
             "cloudinary_id": self.cloudinary_id
             

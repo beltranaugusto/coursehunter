@@ -129,33 +129,55 @@ def getting_events():
 def create_event():
     if request.method == 'POST':
 
-        body = request.json
+        user_id = request.form.get('user_id', None)
+        name = request.form.get('name', None)
+        detail = request.form.get('detail', None)
+        category = request.form.get('category', None)
+        event = request.form.get('event', None)
+        alwaysAvailable = request.form.get('alwaysAvailable', None)
+        location = request.form.get('location', None)
+        online = request.form.get('online', None)
+        date = request.form.get('date', None)
+        duration = request.form.get('duration', None)
+        certificate = request.form.get('certificate', None)
+        author_name = request.form.get('author_name', None)
+        img_url = request.files['img_url']
 
-        user_id = body.get('user_id', None)
-        name = body.get('name', None)
-        detail = body.get('detail', None)
-        category = body.get('category', None)
-        event = body.get('event', None)
-        alwaysAvailable = body.get('alwaysAvailable', None)
-        location = body.get('location', None)
-        online = body.get('online', None)
-        date = body.get('date', None)
-        duration = body.get('duration', None)
-        certificate = body.get('certificate', None)
-        author_name = body.get('author_name', None)
-        img_url = request.files['inputFile']
-
-
-
-        form_data = [user_id, name, detail, category, event, alwaysAvailable, location, online, duration, certificate, img_url]
-        for item in form_data:
-            if item is None:
-                return jsonify({'message': "Form incomplete."}), 400
+        # form_data = [user_id, name, detail, category, event, alwaysAvailable, location, online, duration, certificate, img_url]
+        # for item in form_data:
+        #     if item is None:
+        #         return jsonify({'message': "Form incomplete."}), 400
 
         if date == "":
             date = None
 
         c_upload = uploader.upload(img_url)
+
+
+        if event == "true":
+            event = True
+        else:
+            event = False
+
+
+        if alwaysAvailable == "true":
+            alwaysAvailable = True
+        else:
+            alwaysAvailable = False
+
+            
+        if online == "true":
+            online = True
+        else:
+            online = False
+
+        
+        if certificate == "true":
+            certificate = True
+        else:
+            certificate = False
+
+
       
 
         post = Post(user_id=user_id, name=name, detail=detail, categories=category, event=event, alwaysAvailable=alwaysAvailable, location=location, 

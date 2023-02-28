@@ -32,6 +32,25 @@ export const CreatePost = (props) => {
     const [online, setOnline] = useState(false);
     const [available, setAvailable] = useState(false);
 
+    const createFormData = () => {
+        const formDataNew = new FormData();
+        formDataNew.append("user_id", store.user_id)
+        formDataNew.append("name", inputName)
+        formDataNew.append("detail", inputDetail)
+        formDataNew.append("event", isEvent)
+        formDataNew.append("alwaysAvailable", available)
+        formDataNew.append("location", inputLocation)
+        formDataNew.append("online", online)
+        formDataNew.append("date", inputDate)
+        formDataNew.append("duration", inputDuration)
+        formDataNew.append("certificate", true)
+        formDataNew.append("category", inputCategory)
+        formDataNew.append("author_name", store.userData.username)
+        formDataNew.append("img_url", inputFile)
+        
+        actions.createPost(formDataNew)
+    } 
+
     const changeOnline = (event) => {
         setInputLocation("");
         document.querySelector("#inputLocation").classList.remove("is-invalid");
@@ -58,18 +77,6 @@ export const CreatePost = (props) => {
         if (step == 1) {
             console.log("Step 2");
             if (inputName.length > 5 && inputDetail.length > 20) {
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    event: isEvent,
-                }));
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    name: inputName,
-                }));
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    detail: inputDetail,
-                }));
                 setStep(step + 1);
             }
             if (inputName.length < 5) {
@@ -107,51 +114,9 @@ export const CreatePost = (props) => {
                 (available ||
                     (inputDate.length > 0 && inputDuration.length > 0))
             ) {
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    location: inputLocation,
-                }));
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    online: online,
-                }));
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    date: inputDate,
-                }));
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    alwaysAvailable: available,
-                }));
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    duration: inputDuration,
-                }));
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    category: inputCategory,
-                }));
-                setFormData((prevFormData) => ({
-                    ...prevFormData,
-                    img_url: inputFile,
-                }));
                 setStep(step + 1);
             }
 
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                user_id: store.user_id,
-            }));
-
-            //Cableado
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                certificate: true,
-            }));
-            setFormData((prevFormData) => ({
-                ...prevFormData,
-                author_name: store.userData.username,
-            }));
         }
     }, [change]);
 
@@ -477,7 +442,7 @@ export const CreatePost = (props) => {
                             </Link> */}
                                 <button
                                     type="button"
-                                    onClick={() => actions.createPost(formData)}
+                                    onClick={() => createFormData(formData)}
                                     className="btn btn-success fs-4 fw-light px-5"
                                 >
                                     Crear mi publicación

@@ -16,12 +16,10 @@ const getState = ({ getStore, getActions, setStore }) => {
                 console.log(formData);
                 fetch("http://127.0.0.1:3001/api/create_event", {
                     method: "POST",
-                    body: JSON.stringify(formData),
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    body: formData,
+                    mode: "no-cors"
                 })
-                    .then((response) => response.json())
+                    .then((response) => console.log(response))
                     .then((result) => {
                         getActions().getPostCourses();
                         getActions().getPostEvents();
