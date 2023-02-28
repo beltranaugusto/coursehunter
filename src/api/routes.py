@@ -3,6 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os
 import smtplib
+import cloudinary.uploader as uploader
 from email.message import EmailMessage
 from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
@@ -91,7 +92,7 @@ def sign_up():
             else:
                 password = generate_password_hash(password)
 
-                user = User(username=username, email=email, password=password, is_active=True, publisherMode=publisherMode, publisherType=publisherType)
+                user = User(username=username, email=email, password=password, is_active=True, publisherMode=publisherMode, publisherType=publisherType, img_url=None)
 
                 db.session.add(user)
                 try:
@@ -142,8 +143,11 @@ def create_event():
         duration = body.get('duration', None)
         certificate = body.get('certificate', None)
         author_name = body.get('author_name', None)
+        img_url = request.files['inputFile']
 
-        form_data = [user_id, name, detail, category, event, alwaysAvailable, location, online, duration, certificate]
+
+
+        form_data = [user_id, name, detail, category, event, alwaysAvailable, location, online, duration, certificate, img_url]
         for item in form_data:
             if item is None:
                 return jsonify({'message': "Form incomplete."}), 400
@@ -151,9 +155,20 @@ def create_event():
         if date == "":
             date = None
 
-        post = Post(user_id=user_id, name=name, detail=detail, categories=category, event=event, alwaysAvailable=alwaysAvailable, location=location, online=online, date=date, duration=duration, certificate=certificate, author_name=author_name)
+        c_upload = uploader.upload(img_url)
+
+        post = Post(user_id=user_id, name=name, detail=detail, categories=category, event=event, alwaysAvailable=alwaysAvailable, location=location, 
+                    online=online, date=date, duration=duration, certificate=certificate, author_name=author_name, img_url=c_upload["url"], cloudinary_id=c_upload["public_id"] )
         db.session.add(post)
+
+      
+
+        post = Post(user_id=user_id, name=name, detail=detail, categories=category, event=event, alwaysAvailable=alwaysAvailable, location=location, 
+                    online=online, date=date, duration=duration, certificate=certificate, author_name=author_name, img_url=c_upload["url"], cloudinary_id=c_upload["public_id"] )
+        db.session.add(post)
+
         try:
+
             db.session.commit()
             return jsonify({'message': "Post created"}), 201
         except Exception as error:
