@@ -32,12 +32,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             createUser: (formData) => {
                 return fetch("http://127.0.0.1:3001/api/sign_up", {
                     method: "POST",
-                    body: JSON.stringify(formData),
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    body: formData,
+                    mode: "no-cors"
                 })
-                    .then((response) => response.json())
+                    .then((response) => console.log(response))
                     .then((result) => {
                         console.log("Success:", result);
                         return true;

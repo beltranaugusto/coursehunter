@@ -38,8 +38,9 @@ export const CourseDetail = () => {
             </div>
             <img
               className="w-100 border rounded mt-2"
-              src="https://picsum.photos/700/250"
+              src={course?.img_url}
               alt="..."
+              
             />
           </div>
           <div className="container mt-4">

@@ -11,7 +11,7 @@ export const Card = (props) => {
     <>
       <div className="card">
         <img
-          src="https://picsum.photos/200/200"
+          src={`${props.data?.img_url}`}
           className="card-img-top"
           alt="..."
         />

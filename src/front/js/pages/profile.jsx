@@ -24,7 +24,7 @@ export const Profile = () => {
         <div className="row d-flex justify-content-start mx-auto">
           <div className="col-12 col-md-3 d-flex justify-content-center p-0">
             <img
-              src="https://placekitten.com/590/360"
+              src={store?.tempUserData?.img_url}
               className="rounded w-100 h-100"
               alt="..."
               

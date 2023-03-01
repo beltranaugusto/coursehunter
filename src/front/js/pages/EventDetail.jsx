@@ -34,7 +34,7 @@ export const EventDetail = () => {
             </div>     
             <img
               className="w-100 border rounded mt-2"
-              src="https://picsum.photos/700/250"
+              src={event?.img_url}
               alt="..."
             />
           </div>

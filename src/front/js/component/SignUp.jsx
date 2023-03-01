@@ -12,11 +12,13 @@ export const SignUp = (props) => {
     const [publisherMode, setPublisherMode] = useState(false);
     const [publisherType, setPublisherType] = useState(null);
     const [errorMessage, setErrorMessage] = useState(false);
+    const [inputFile, setInputFile] = useState();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const signup = await actions.createUser(formData);
+        
+        const signup = await actions.createUser(FormDataNew());
         if (signup) {
             setErrorMessage(false);
             navigate("/login");
@@ -24,6 +26,17 @@ export const SignUp = (props) => {
             setErrorMessage(true);
         }
     };
+
+    const FormDataNew = () => {
+        const formDataNew = new FormData();
+        formDataNew.append("username", username)
+        formDataNew.append("email", email)
+        formDataNew.append("password", password)
+        formDataNew.append("publisherMode", publisherMode)
+        formDataNew.append("publisherType", publisherType)
+        formDataNew.append("img_url", inputFile)
+        return formDataNew  
+    } 
 
     useEffect(() => {
         setFormData((prevFormData) => ({
@@ -86,6 +99,18 @@ export const SignUp = (props) => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
+
+                    <div className="col-5 mx-auto">
+                                    <input
+                                        className="form-control"
+                                        type="file"
+                                        name="img_url"
+                                        id=""
+                                        onChange={(e) =>
+                                            setInputFile(e.target.files[0])
+                                        }
+                                    />
+                                </div>
 
                     <div className="col-5 form-check mx-auto">
                         <input
