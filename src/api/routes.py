@@ -90,6 +90,11 @@ def sign_up():
 
         if publisherMode == "true":
             publisherMode = True
+        else:
+            publisherMode = False
+
+        if publisherType == "null":
+            publisherType = None
 
         c_upload = uploader.upload(img_url)
         

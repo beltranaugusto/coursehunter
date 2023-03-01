@@ -37,16 +37,16 @@ export const Profile = () => {
                 <div className="user-props">
                   <div className="d-flex justify-content-between">
                       <div className="d-flex">
-                      {store?.tempUserData?.publisherMode ? (
+                      {store?.tempUserData?.publisherTypeValue != ""  ? (
                         <ul class="list-group margin-right"> 
-                            <>
+                            
                               <li className="list-group-item">
                               <strong>Publicador</strong>
                               </li>
                               <li className="list-group-item">
-                                {store?.tempUserData?.publisherType}
+                                {store?.tempUserData?.publisherTypeValue}
                               </li>
-                            </>
+
                         </ul>
                       ) : null} 
                         <ul class="list-group">
