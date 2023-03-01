@@ -21,7 +21,7 @@ export const Profile = () => {
     <div className="profile mx-auto">
       
       <div className="container mt-5">
-        <div className="row d-flex justify-content-start mx-auto">
+        <div className="row d-flex gx-5 justify-content-start mx-auto">
           <div className="col-12 col-md-3 d-flex justify-content-center p-0">
             <img
               src={store?.tempUserData?.img_url}
@@ -30,8 +30,8 @@ export const Profile = () => {
               
             />
           </div>
-          <div className="col-12 col-md-8 margin-left border rounded">
-            <div className="card-body d-flex flex-column justify-content-between h-100">
+          <div className="col-12 col-md-9">
+            <div className="card-body  border rounded d-flex flex-column justify-content-between h-100">
               
                 <h2 className="display-5 mx-2 my-4">{store?.tempUserData?.username}</h2>
                 <div className="user-props">

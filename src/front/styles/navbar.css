@@ -1,0 +1,52 @@
+/*Logo*/
+
+.logo {
+    margin-top: -45px;
+    margin-bottom: -45px;
+    margin-left: -55px;
+    margin-right: -55px;
+}
+nav.navbar button.logo-text {
+    font-size: 1.5em;
+    font-weight: lighter;
+}
+
+/* Botones del navbar generales */
+
+nav.navbar button {
+    padding: 10px 10px 10px 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 1.2em;
+    background-color: transparent !important;
+    color: #354350 !important;;
+    
+}
+
+/* Botones de publicar y mi perfil */
+
+nav.navbar button.btn-success {
+    background-color: transparent !important;
+    border: 1px solid transparent ;
+    color: #188030 !important;
+}
+
+/* Botones de ingresar y salirse */
+
+nav.navbar button.login-btn {
+    border: 1px solid transparent !important ;
+    color: #188030   !important;
+}
+
+nav.navbar button.logout-btn {
+    border: 1px solid transparent !important ;
+    color: #b63242 !important;
+}
+
+/* Separador */
+
+.divider {
+    height: 40px;
+    border-left: 1px solid #dfe0e0 ;
+    margin: auto 0px auto 0px;
+}
