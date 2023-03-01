@@ -30,6 +30,7 @@ class User(db.Model):
 
     def serialize(self):
 
+        publisherTypeValue = ""
         posts = []
         favorites = []
         askedInfo = []
@@ -43,6 +44,9 @@ class User(db.Model):
         for item in self.favorites:
             favorites.append(item.post_id)
 
+        if self.publisherType:
+            publisherTypeValue = self.publisherType.value
+
         return {
             "id": self.id,
             "username": self.username,
@@ -52,7 +56,8 @@ class User(db.Model):
             "post": posts,
             "favorites": favorites,
             "askedInfo": askedInfo,
-            "publisherType": self.publisherType.value,
+            
+            "publisherTypeValue": publisherTypeValue,
             "img_url": self.img_url,
             "cloudinary_id": self.cloudinary_id
             
