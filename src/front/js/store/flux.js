@@ -8,7 +8,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       urlBase: "http://localhost:3001/api",
       postcourses: [],
       postevents: [],
-
+      searchValue: "",
+      searchCategory: "",
+      coursesandeventsbycategory: [],
     },
     actions: {
       createPost: async (formData) => {
@@ -123,15 +125,27 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => {
             console.error("Error:", error);
           });
-        },
+      },
 
       logout: () => {
         localStorage.removeItem("token");
         setStore({ token: null });
-    }
+      },
+      searchPost: (name) => {
+        setStore({ searchValue: name });
+      },
+      filterbycategory: (category) => {
+        setStore({ searchCategory: category });
+      },
+      coursesandeventsbycategory: () => {
+        const posts = [...getStore().postevents, ...getStore().postcourses];
+        const categories = posts.map((post) => post.categories);
+        const uniquecategory = [...new Set(categories)];
 
-    }
-  }
+        setStore({ coursesandeventsbycategory: uniquecategory });
+      },
+    },
+  };
 };
 
 export default getState;

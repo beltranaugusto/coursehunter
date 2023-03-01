@@ -18,8 +18,8 @@ export const Courses = () => {
 
         {/* Lorman - Categorias */}
         <div>
-          <Categories type="curso" keyword="Hola" />
-          {/* <Categories type="curso"/> */}
+          <Categories type="curso" />
+          <Categories type="curso" />
         </div>
 
         <div className="d-flex justify-content-end w-100">

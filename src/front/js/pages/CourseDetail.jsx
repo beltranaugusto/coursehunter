@@ -13,7 +13,7 @@ export const CourseDetail = () => {
 
   const { postcourses } = store;
   const course = postcourses.find((post) => post.id == params.id);
-  console.log(params);
+
   return (
     <>
       <div className="container border rounded mt-5 h-100 w-100 d-flex justify-content-between p-4">
@@ -106,4 +106,3 @@ export const CourseDetail = () => {
     </>
   );
 };
-
