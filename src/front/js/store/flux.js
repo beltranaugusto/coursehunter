@@ -177,6 +177,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.log(error);
                 }
             },
+            searchPost: (name) => {
+        setStore({ searchValue: name });
+      },
+      filterbycategory: (category) => {
+        setStore({ searchCategory: category });
+      },
+      coursesandeventsbycategory: () => {
+        const posts = [...getStore().postevents, ...getStore().postcourses];
+        const categories = posts.map((post) => post.categories);
+        const uniquecategory = [...new Set(categories)];
+
+        setStore({ coursesandeventsbycategory: uniquecategory });
+      },
         },
     };
 };

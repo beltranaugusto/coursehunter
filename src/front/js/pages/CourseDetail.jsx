@@ -13,6 +13,7 @@ export const CourseDetail = () => {
 
   const { postcourses } = store;
   const course = postcourses.find((post) => post.id == params.id);
+
   const infoAsked = store.userData.askedInfo?.find((item) => course?.id == item) 
   const favorited = store.userData.favorites?.find((item) => course?.id == item) 
 
@@ -132,4 +133,3 @@ export const CourseDetail = () => {
     </>
   );
 };
-

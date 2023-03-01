@@ -5,9 +5,8 @@ import { Categories } from "../component/Categories.jsx";
 
 import { Context } from "../store/appContext";
 
-export const Courses = (props) => {
+export const Courses = () => {
   const { store, actions } = useContext(Context);
-  let type = props.type;
 
   return (
     <>
