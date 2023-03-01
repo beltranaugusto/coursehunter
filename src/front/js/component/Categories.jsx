@@ -11,6 +11,7 @@ export const Categories = (props) => {
   const { store, actions } = useContext(Context);
   const { postcourses, postevents } = store;
 
+
   useEffect(() => {
     if (props.type == "curso") {
       setPosts(postcourses);
@@ -19,6 +20,7 @@ export const Categories = (props) => {
     }
     actions.coursesandeventsbycategory();
   }, [postcourses]);
+
 
   return (
     <>

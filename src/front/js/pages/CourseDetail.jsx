@@ -14,18 +14,34 @@ export const CourseDetail = () => {
   const { postcourses } = store;
   const course = postcourses.find((post) => post.id == params.id);
 
+  const infoAsked = store.userData.askedInfo?.find((item) => course?.id == item) 
+  const favorited = store.userData.favorites?.find((item) => course?.id == item) 
+
+  // Buscar como hacer que el componente se recargue cada vez que la lista de askedInfo en el userData del store se actualice.
+  useEffect( ()=> { 
+  }, [])
+  
   return (
     <>
       <div className="container border rounded mt-5 h-100 w-100 d-flex justify-content-between p-4">
-        <div className="d-flex flex-column left-col">
+        <div className="d-flex flex-column left-col w-100">
           <div className="container">
-            <h2 className="display-5 text-center border rounded p-4">
-              {course?.name}
-            </h2>
+          <div className="text-center border rounded p-4">
+              <h2 className="display-5 ">
+                {course?.name}
+              </h2>
+              <h1 className="small">
+                Creado por: 
+                <Link to={`/profile/${course?.author}`}>
+                  <div className="d-inline mx-1">{course?.author_name}</div>
+                </Link>
+              </h1>
+            </div>
             <img
               className="w-100 border rounded mt-2"
-              src="https://picsum.photos/700/250"
+              src={course?.img_url}
               alt="..."
+              
             />
           </div>
           <div className="container mt-4">
@@ -82,23 +98,34 @@ export const CourseDetail = () => {
                 </li>
               ) : null}
             </ul>
-            <div className="buttons d-flex flex-column">
-              <Link to="/">
-                <button className="btn btn-primary w-100">
+            <div className="buttons d-flex justify-content-between">
+            
+            { store.user_id == "" ? null :
+
+              infoAsked ? 
+                <button type="button" className="btn btn-success w-50">
+                  Ya solicitaste información
+                </button>
+              : 
+                <button type="button"  onClick={() => {actions.askInformation(store.user_id, course.author, course.id)}} className="btn btn-primary w-50">
                   Solicitar Informacion
                 </button>
-              </Link>
-              <button
-                type="button"
-                className="btn w-100"
-                onClick={() => {
-                  {
-                    actions.addCard(course.id, 1);
-                  }
-                }}
-              >
-                <i className="fas fa-heart"></i>
-              </button>
+            }
+
+            { store.user_id == "" ? null :
+                <button
+                  type="button"
+                  className={"btn btn-secondary w-25 " + (favorited ? ("btn-warning") : null)}
+                  onClick={() => {
+                    {
+                      actions.addCard(course.id, store.user_id);
+                    }
+                  }}
+                >
+                <i class="fa-solid fa-bookmark"></i>
+                </button>
+              }
+              
             </div>
           </div>
         </div>
