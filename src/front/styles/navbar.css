@@ -1,0 +1,26 @@
+nav.navbar.navbar-light {
+    background-color: #152534;
+    color: white;
+}
+
+.btn:not(.active) {
+    background-color: transparent;
+    color: white;
+}
+
+.btn.active,
+.btn:active,
+.btn:focus {
+    background-color: #3f6269;
+    border-radius: 25px;
+    color: white;
+}
+
+.btnbtn mx-1 btn-log {
+    background-color: #587b77;
+    color: #ffffff;
+}
+
+#log {
+    background-color: #587b77;
+}
