@@ -17,11 +17,13 @@ class User(db.Model):
     email = db.Column(db.String(220), unique=True, nullable=False)
     password = db.Column(db.String(280), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    publisherMode = db.Column(db.Boolean(), unique=False, nullable=False)
-    publisherType = db.Column("publishertype",Enum(Publishertype), unique=False, nullable=False)
+    publisherMode = db.Column(db.Boolean(), unique=False, nullable=True)
+    publisherType = db.Column("publishertype",Enum(Publishertype), unique=False, nullable=True)
     post = db.relationship("Post", backref="user", lazy=True)
     favorites = db.relationship("Favorites", backref="user", lazy = True)
     askedInfo = db.relationship("AskedInfo", backref="user", lazy = True)
+    img_url = db.Column(db.String(200), unique=True, nullable=True)
+    cloudinary_id = db.Column(db.String(200), unique=True, nullable=True)
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -50,7 +52,9 @@ class User(db.Model):
             "post": posts,
             "favorites": favorites,
             "askedInfo": askedInfo,
-            "publisherType": self.publisherType.value
+            "publisherType": self.publisherType.value,
+            "img_url": self.img_url,
+            "cloudinary_id": self.cloudinary_id
             
             
             
@@ -76,6 +80,8 @@ class Post(db.Model):
     creationDate = db.Column(db.DateTime(timezone=True), server_default=str(datetime.now()))
     favorites = db.relationship("Favorites", backref="post", lazy = True)
     askedInfo = db.relationship("AskedInfo", backref="post", lazy = True)
+    img_url = db.Column(db.String(200), unique=True, nullable=False)
+    cloudinary_id = db.Column(db.String(200), unique=True, nullable=False)
 
     def __repr__(self):
         return f'<Post {self.name}>'
@@ -93,7 +99,9 @@ class Post(db.Model):
             "date": self.date,
             "duration": self.duration,
             "certificate": self.certificate,
-            "author_name": self.author_name 
+            "author_name": self.author_name,
+            "img_url": self.img_url,
+            "cloudinary_id": self.cloudinary_id
             }
 
 class Categories(db.Model):
