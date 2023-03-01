@@ -11,7 +11,6 @@ export const Categories = (props) => {
   const { store, actions } = useContext(Context);
   const { postcourses, postevents } = store;
 
-
   useEffect(() => {
     if (props.type == "curso") {
       setPosts(postcourses);
@@ -21,20 +20,19 @@ export const Categories = (props) => {
     actions.coursesandeventsbycategory();
   }, [postcourses]);
 
-
   return (
     <>
       <div className="home">
         <div className="container container-categories">
           <div className="home-card-list">
-            {/* {store.searchCategory !== ""
+            {store.searchCategory !== ""
               ? posts
                   .filter((data) => data.categories == store?.searchCategory)
                   .map((data) => {
                     if (
                       data?.name
                         .toLowerCase()
-                        .includes(store.searchValue.toLowerCase())
+                        .includes(store.searchValue?.toLowerCase())
                     ) {
                       return (
                         <Card key={data.id} data={data} type={props.type} />
@@ -49,22 +47,7 @@ export const Categories = (props) => {
                   ) {
                     return <Card key={data.id} data={data} type={props.type} />;
                   }
-                })} */}
-            { store.searchValue? 
-              posts.map((data) => {
-                if (
-                  data?.name
-                    .includes(store.searchValue)
-                ) {
-                  return <Card key={data.id} data={data} type={props.type} />;
-                }
-                })
-             :
-              posts.map((data) => {
-                
-                  return <Card key={data.id} data={data} type={props.type} />;}
-                )
-             }
+                })}
           </div>
         </div>
       </div>
