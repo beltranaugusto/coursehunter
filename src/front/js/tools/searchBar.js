@@ -15,7 +15,7 @@ export const SearchBar = () => {
         value={store.searchValue}
         onChange={(e) => actions.searchPost(e.target.value.trim())}
       />
-      {/* <button
+      <button
         className="btn btn-outline-secondary dropdown-toggle"
         type="button"
         data-bs-toggle="dropdown"
@@ -48,7 +48,7 @@ export const SearchBar = () => {
           </div>
         </li>
       </ul>
-      ; */}
+      ;
     </div>
   );
 };
