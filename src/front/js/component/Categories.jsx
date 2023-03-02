@@ -6,20 +6,64 @@ import { Card } from "./Card.jsx";
 export const Categories = (props) => {
   let type = props.type;
   const [posts, setPosts] = useState([]);
-  // let keyword = props.keyword;
-  // console.log(keyword);
   const { store, actions } = useContext(Context);
   const { postcourses, postevents } = store;
 
+  const checkFavorites = () => {
+    let favoritesPosts = []
+
+    for(let post of postcourses){
+      if(store.userData?.favorites){
+        for (let favorite_id of store?.userData?.favorites){
+          if(post.id == favorite_id){
+            favoritesPosts.push(post)          
+          }
+        }
+      }
+    }
+
+    for(let post of postevents){
+      if(store.userData?.favorites){
+        for (let favorite_id of store?.userData?.favorites){
+          if(post.id == favorite_id){
+            favoritesPosts.push(post)          
+          }
+        }
+      }
+    }
+  
+    setPosts(favoritesPosts)
+
+  }
+
+  const checkCreated = () => {
+    let createdPosts = []
+
+    for(let post of postcourses){
+        if(post.author == store.tempUserData.id){
+          createdPosts.push(post)        
+        }      
+    }
+  
+    setPosts(createdPosts)
+
+  }
+  
 
   useEffect(() => {
-    if (props.type == "curso") {
-      setPosts(postcourses);
+
+    if(props.created == "true"){
+      checkCreated()
+    } else if(props.favorite == "true"){
+      checkFavorites()
+    } else if (props.type == "curso"){
+        setPosts(postcourses);
     } else {
-      setPosts(postevents);
-    }
+        setPosts(postevents);
+    } 
+
     actions.coursesandeventsbycategory();
-  }, [postcourses]);
+  }, [postcourses, store.userData.favorites, store.tempUserData.posts]);
 
 
   return (
@@ -61,10 +105,16 @@ export const Categories = (props) => {
                 })
              :
               posts.map((data) => {
-                
-                  return <Card key={data.id} data={data} type={props.type} />;}
+                  let postType = ""
+                  if(data.event == true){
+                    postType="evento"
+                  } else {
+                    postType="curso"
+                  }
+                  return <Card key={data.id} data={data} type={postType} />;}
                 )
              }
+            {posts.length == 0 ? <h3 className="fw-light">No hay publicaciones aqui!</h3>: null}
           </div>
         </div>
       </div>

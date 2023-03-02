@@ -56,7 +56,6 @@ class User(db.Model):
             "post": posts,
             "favorites": favorites,
             "askedInfo": askedInfo,
-            
             "publisherTypeValue": publisherTypeValue,
             "img_url": self.img_url,
             "cloudinary_id": self.cloudinary_id
@@ -106,7 +105,8 @@ class Post(db.Model):
             "certificate": self.certificate,
             "author_name": self.author_name,
             "img_url": self.img_url,
-            "cloudinary_id": self.cloudinary_id
+            "cloudinary_id": self.cloudinary_id,
+            "event": self.event
             }
 
 class Categories(db.Model):
@@ -137,7 +137,6 @@ class Favorites(db.Model):
     def serialize(self):
         return{
             "post_id": self.post_id,
-           
             }
     
 class AskedInfo(db.Model):

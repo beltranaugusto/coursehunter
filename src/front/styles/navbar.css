@@ -11,24 +11,43 @@ nav.navbar button.logo-text {
     font-weight: lighter;
 }
 
+nav.nav-bar {
+    border: 1px solid #354350 !important;
+    
+}
 /* Botones del navbar generales */
 
 nav.navbar button {
-    padding: 10px 10px 10px 10px;
+    padding: 10px 5px 10px 5px;
     border: 1px solid transparent;
     border-radius: 5px;
     font-size: 1.2em;
     background-color: transparent !important;
-    color: #354350 !important;;
+    color: #354350 !important;
     
 }
 
-/* Botones de publicar y mi perfil */
+/* Botones de publicar y mi perfil y notificaciones*/
+
+.dropdown {
+    width: 58px;
+    height: 60px;
+}
+
+nav.navbar button.notifications-button{
+    margin:     0px !important;
+    padding: 0px !important;
+}
+nav.navbar i{
+    margin: 10px -5px 10px 10px !important;
+    padding: 10px !important;
+    border: 1px solid transparent ;
+}
 
 nav.navbar button.btn-success {
-    background-color: transparent !important;
-    border: 1px solid transparent ;
-    color: #188030 !important;
+    margin: 0px 10px 0px 1  0px !important;
+    border: 1px solid transparent !important ;
+    color: #188030   !important;
 }
 
 /* Botones de ingresar y salirse */
@@ -39,6 +58,7 @@ nav.navbar button.login-btn {
 }
 
 nav.navbar button.logout-btn {
+    padding: 10px;
     border: 1px solid transparent !important ;
     color: #b63242 !important;
 }
@@ -48,5 +68,5 @@ nav.navbar button.logout-btn {
 .divider {
     height: 40px;
     border-left: 1px solid #dfe0e0 ;
-    margin: auto 0px auto 0px;
+    margin: auto 10px auto 10px;
 }

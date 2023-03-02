@@ -5,7 +5,6 @@ import { Context } from "../store/appContext";
 export const Card = (props) => {
   const { store, actions } = useContext(Context);
   const favorited = store.userData.favorites?.find((item) => props.data?.id == item) 
-  console.log(props?.data)
 
   return (
     <>

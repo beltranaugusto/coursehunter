@@ -9,6 +9,10 @@
   margin-left: 1.75rem;
 }
 
+.no-padding-left {
+  padding-left: 0px !important;
+}
+
 .user-props {
   min-width: 200px;
 }
