@@ -19,7 +19,7 @@ export const Navbar = () => {
           <button className="btn btn-primary mx-1 logo-text">CourseHunter</button>
         </Link>
         
-        <div className="d-flex">
+        <div className="d-flex align-items-center">
           <Link to="/cursos">
             <button className="btn btn-primary mx-1">Cursos</button>
           </Link>
@@ -27,14 +27,31 @@ export const Navbar = () => {
             <button className="btn btn-primary mx-1">Eventos</button>
           </Link>
 
-          <div className="divider d-flex align-items-center mx-1"></div>
+          <div className="divider d-flex align-items-center mx-3"></div>
           
 
           {token !== null ? (
-            <div className="marginl-auto">
-              <Link to="/publicar">
+            <div className="marginl-auto d-flex align-items-center">
+
+              <div className="dropdown">
+                <button className="notifications-button" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i className="fa-regular fa-bell btn btn-warning notifications"></i>
+                </button>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><a className="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+              
+              
+
+              {store?.userData?.publisherTypeValue != ""  ? (
+                <Link to="/publicar">
                 <button className="btn btn-success mx-1">Publicar</button>
               </Link>
+              ): null}
+    
               <Link to={"/profile/" + store.user_id}>
                 <button className="btn btn-success mx-1"> Mi Perfil </button>
               </Link>
