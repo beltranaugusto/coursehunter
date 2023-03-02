@@ -14,38 +14,40 @@ export const CourseDetail = () => {
   const { postcourses } = store;
   const course = postcourses.find((post) => post.id == params.id);
 
-  const infoAsked = store.userData.askedInfo?.find((item) => course?.id == item) 
-  const favorited = store.userData.favorites?.find((item) => course?.id == item) 
+  const infoAsked = store.userData.askedInfo?.find(
+    (item) => course?.id == item
+  );
+  const favorited = store.userData.favorites?.find(
+    (item) => course?.id == item
+  );
 
   // Buscar como hacer que el componente se recargue cada vez que la lista de askedInfo en el userData del store se actualice.
-  useEffect( ()=> { 
-  }, [])
-  
+  useEffect(() => {}, []);
+
   return (
     <>
       <div className="container border rounded mt-5 h-100 w-100 d-flex justify-content-between p-4">
         <div className="d-flex flex-column left-col w-100">
           <div className="container">
-          <div className="text-center border rounded p-4">
-              <h2 className="display-5 ">
-                {course?.name}
-              </h2>
+            <div className="text-center border rounded p-4">
+              <h2 className="display-5 ">{course?.name}</h2>
               <h1 className="small">
-                Creado por: 
+                Creado por:
                 <Link to={`/profile/${course?.author}`}>
                   <div className="d-inline mx-1">{course?.author_name}</div>
                 </Link>
               </h1>
             </div>
-            <img
-              className="w-100 border rounded mt-2"
-              src={course?.img_url}
-              alt="..."
-              
-            />
+            <div className="img">
+              <img
+                className=" border rounded mt-2 "
+                src={course?.img_url}
+                alt="..."
+              />
+            </div>
           </div>
           <div className="container mt-4">
-            <div className="border rounded p-4">
+            <div className="detail border rounded p-4">
               <p>{course?.detail}</p>
             </div>
           </div>
@@ -99,33 +101,42 @@ export const CourseDetail = () => {
               ) : null}
             </ul>
             <div className="buttons d-flex justify-content-between">
-            
-            { store.user_id == "" ? null :
-
-              infoAsked ? 
+              {store.user_id == "" ? null : infoAsked ? (
                 <button type="button" className="btn btn-success w-50">
                   Ya solicitaste información
                 </button>
-              : 
-                <button type="button"  onClick={() => {actions.askInformation(store.user_id, course.author, course.id)}} className="btn btn-primary w-50">
-                  Solicitar Informacion
-                </button>
-            }
-
-            { store.user_id == "" ? null :
+              ) : (
                 <button
                   type="button"
-                  className={"btn btn-secondary w-25 " + (favorited ? ("btn-warning") : null)}
+                  onClick={() => {
+                    actions.askInformation(
+                      store.user_id,
+                      course.author,
+                      course.id
+                    );
+                  }}
+                  className="btn btn-primary w-50"
+                >
+                  Solicitar Informacion
+                </button>
+              )}
+
+              {store.user_id == "" ? null : (
+                <button
+                  type="button"
+                  className={
+                    "btn btn-secondary w-25 " +
+                    (favorited ? "btn-warning" : null)
+                  }
                   onClick={() => {
                     {
                       actions.addCard(course.id, store.user_id);
                     }
                   }}
                 >
-                <i class="fa-solid fa-bookmark"></i>
+                  <i class="fa-solid fa-bookmark"></i>
                 </button>
-              }
-              
+              )}
             </div>
           </div>
         </div>

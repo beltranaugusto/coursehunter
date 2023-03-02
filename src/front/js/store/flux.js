@@ -90,9 +90,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           let response = await fetch(`${getStore().urlBase}/courses`);
           let data = await response.json();
-          console.log(data);
+
           setStore({
-            postcourses: data
+            postcourses: data,
           });
         } catch (error) {
           console.log(`${error} error`);
@@ -188,7 +188,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       cleanInput: () => {
         setStore({ searchCategory: "", searchValue: "" });
-      }
+      },
     },
   };
 };
