@@ -183,8 +183,6 @@ def create_event():
         else:
             certificate = False
 
-        print(request.form)
-
         post = Post(user_id=user_id, name=name, detail=detail, categories=category, event=event, alwaysAvailable=alwaysAvailable, location=location, 
                     online=online, date=date, duration=duration, certificate=certificate, author_name=author_name, img_url=c_upload["url"], cloudinary_id=c_upload["public_id"] )
         db.session.add(post)
@@ -325,6 +323,18 @@ def post_email(user_id=None, publisher_id=None, post_id=None):
         except Exception as error:
             print(error)
             return jsonify({"message": "Error, try again"}), 500
+
+@api.route('/delete/<int:post_id>', methods=['DELETE'])
+def delPost(post_id=None):
+    if request.method =='DELETE':
+        if Post.query.filter_by(id=post_id).first():
+            post= Post.query.filter_by(id=post_id).first()
+            db.session.delete(post)
+            db.session.commit()
+            return jsonify({'Message':'Post has been deleted'}), 200
+        return ('Message':'Post has been deleted')
+
+
             
         
         

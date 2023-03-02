@@ -9,58 +9,59 @@ export const Categories = (props) => {
   const { store, actions } = useContext(Context);
   const { postcourses, postevents } = store;
 
-
   const checkFavorites = () => {
-    let favoritesPosts = []
+    let favoritesPosts = [];
 
-    for(let post of postcourses){
-      if(store.userData?.favorites){
-        for (let favorite_id of store?.userData?.favorites){
-          if(post.id == favorite_id){
-            favoritesPosts.push(post)          
+    for (let post of postcourses) {
+      if (store.userData?.favorites) {
+        for (let favorite_id of store?.userData?.favorites) {
+          if (post.id == favorite_id) {
+            favoritesPosts.push(post);
           }
         }
       }
     }
 
-    for(let post of postevents){
-      if(store.userData?.favorites){
-        for (let favorite_id of store?.userData?.favorites){
-          if(post.id == favorite_id){
-            favoritesPosts.push(post)          
+    for (let post of postevents) {
+      if (store.userData?.favorites) {
+        for (let favorite_id of store?.userData?.favorites) {
+          if (post.id == favorite_id) {
+            favoritesPosts.push(post);
           }
         }
       }
     }
-  
-    setPosts(favoritesPosts)
 
-  }
+    setPosts(favoritesPosts);
+  };
 
   const checkCreated = () => {
-    let createdPosts = []
+    let createdPosts = [];
 
-    for(let post of postcourses){
-        if(post.author == store.tempUserData.id){
-          createdPosts.push(post)        
-        }      
+    for (let post of postcourses) {
+      if (post.author == store.tempUserData.id) {
+        createdPosts.push(post);
+      }
     }
-  
-    setPosts(createdPosts)
+    for (let post of postevents) {
+      if (post.author == store.tempUserData.id) {
+        createdPosts.push(post);
+      }
+    }
 
-  }
-  
+    setPosts(createdPosts);
+  };
+
   useEffect(() => {
-
-    if(props.created == "true"){
-      checkCreated()
-    } else if(props.favorite == "true"){
-      checkFavorites()
-    } else if (props.type == "curso"){
-        setPosts(postcourses);
+    if (props.created == "true") {
+      checkCreated();
+    } else if (props.favorite == "true") {
+      checkFavorites();
+    } else if (props.type == "curso") {
+      setPosts(postcourses);
     } else {
-        setPosts(postevents);
-    } 
+      setPosts(postevents);
+    }
 
     actions.coursesandeventsbycategory();
   }, [postcourses, store.userData.favorites, store.tempUserData.posts]);
@@ -85,17 +86,20 @@ export const Categories = (props) => {
                     }
                   })
               : posts.map((data) => {
+                  let type = "";
+                  if (data.event == true) {
+                    type = "evento";
+                  } else {
+                    type = "curso";
+                  }
                   if (
                     data?.name
                       .toLowerCase()
                       .includes(store.searchValue.toLowerCase())
                   ) {
-                    return <Card key={data.id} data={data} type={props.type} />;
+                    return <Card key={data.id} data={data} type={type} />;
                   }
-              })}
-                
-                
-
+                })}
           </div>
         </div>
       </div>
