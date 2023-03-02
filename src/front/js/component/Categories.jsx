@@ -45,6 +45,11 @@ export const Categories = (props) => {
           createdPosts.push(post)        
         }      
     }
+    for(let post of postevents){
+        if(post.author == store.tempUserData.id){
+          createdPosts.push(post)        
+        }      
+    }
   
     setPosts(createdPosts)
 
@@ -80,17 +85,23 @@ export const Categories = (props) => {
                         .includes(store.searchValue?.toLowerCase())
                     ) {
                       return (
-                        <Card key={data.id} data={data} type={props.type} />
+                        <Card key={data.id} data={data} type={type} />
                       );
                     }
                   })
               : posts.map((data) => {
+                  let type = ""
+                  if(data.event == true){
+                    type = "evento"
+                  }else{
+                    type = "curso"
+                  }
                   if (
                     data?.name
                       .toLowerCase()
                       .includes(store.searchValue.toLowerCase())
                   ) {
-                    return <Card key={data.id} data={data} type={props.type} />;
+                    return <Card key={data.id} data={data} type={type} />;
                   }
               })}
                 
