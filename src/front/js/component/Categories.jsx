@@ -49,6 +49,7 @@ export const Categories = (props) => {
       }
     }
 
+
     setPosts(createdPosts);
   };
 
@@ -81,16 +82,18 @@ export const Categories = (props) => {
                         .includes(store.searchValue?.toLowerCase())
                     ) {
                       return (
-                        <Card key={data.id} data={data} type={props.type} />
+                        <Card key={data.id} data={data} type={type} />
                       );
                     }
                   })
               : posts.map((data) => {
+
                   let type = "";
                   if (data.event == true) {
                     type = "evento";
                   } else {
                     type = "curso";
+
                   }
                   if (
                     data?.name

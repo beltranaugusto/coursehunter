@@ -1,0 +1,47 @@
+.hero-section{
+    height: 510px;
+    text-align: center;
+}
+
+.hero-text {
+    width: 500px;
+    height: 200px;
+    margin-bottom: -80px;
+}
+
+.hero-img {
+    width: 400px;
+    height: 400px;
+    margin: -100px -200px -180px -200px;
+}
+
+.home-post-display{
+    height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-size:cover;
+
+    border-radius: 10px;
+    border: 1px solid #354350;
+
+}
+
+.home-post-display p {
+    color: rgb(255, 255, 255);
+    background-color: rgba(71, 71, 71, 0.253);
+    padding: 20px 40px 20px 40px;
+    border-radius: 5px;
+}
+
+
+.home-post-display.one{
+    background-image: url(https://www.oxfordlearning.com/wp-content/uploads/2009/05/tips-for-easier-studying-860x420.jpg);
+    
+}
+
+.home-post-display.two{
+    background-image: url(https://assets.entrepreneur.com/content/3x2/2000/20160217205210-speaker-public-presentations-audience-conference-hand-gestures-body-language-information-meeting-talking.jpeg);
+}
