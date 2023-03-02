@@ -26,6 +26,7 @@ export const CreatePost = (props) => {
     const [inputLocation, setInputLocation] = useState("");
     const [inputDate, setInputDate] = useState("");
     const [inputDuration, setInputDuration] = useState("");
+    const [inputCertificate, setInputCertificate] = useState(false);
     const [inputCategory, setInputCategory] = useState("Tecnologia");
     const [inputFile, setInputFile] = useState();
 
@@ -43,10 +44,10 @@ export const CreatePost = (props) => {
         formDataNew.append("online", online)
         formDataNew.append("date", inputDate)
         formDataNew.append("duration", inputDuration)
-        formDataNew.append("certificate", true)
         formDataNew.append("category", inputCategory)
         formDataNew.append("author_name", store.userData.username)
         formDataNew.append("img_url", inputFile)
+        formDataNew.append("certificate", inputCertificate)
         
         actions.createPost(formDataNew)
     } 
@@ -363,6 +364,20 @@ export const CreatePost = (props) => {
                                         value={inputDuration}
                                     ></input>
                                 </div>
+                                <div className="col-2">
+                                    <h5 className="fw-light align-center">
+                                        ¿Tiene Certificado?
+                                    </h5>
+                                </div>
+                                <div className="col-1">
+                                    <input
+                                        name="alwaysAvailable"
+                                        onChange={(e) => {
+                                            setInputCertificate(e.target.value)}}
+                                        className="form-control form-check-input em2"
+                                        type="checkbox"
+                                    ></input>
+                                </div>
                             </div>
                             <div className="row mx-5 my-3 form-group">
                                 <div className="col-3">
@@ -400,6 +415,7 @@ export const CreatePost = (props) => {
 
                                 <div className="col-4">
                                     <input
+                                        className="form-control"
                                         type="file"
                                         name="img_url"
                                         id=""

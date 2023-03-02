@@ -183,6 +183,8 @@ def create_event():
         else:
             certificate = False
 
+        print(request.form)
+
         post = Post(user_id=user_id, name=name, detail=detail, categories=category, event=event, alwaysAvailable=alwaysAvailable, location=location, 
                     online=online, date=date, duration=duration, certificate=certificate, author_name=author_name, img_url=c_upload["url"], cloudinary_id=c_upload["public_id"] )
         db.session.add(post)

@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { SearchBar } from "../tools/searchBar";
-import { Categories } from "../component/Categories.jsx";
+import { CategoriesGrid } from "../component/CategoriesGrid.jsx";
 
 import { Context } from "../store/appContext";
 
 export const Courses = () => {
   const { store, actions } = useContext(Context);
+
+  useEffect(() => {
+    actions.cleanInput()
+  }, [])
+
 
   return (
     <>
@@ -18,8 +23,7 @@ export const Courses = () => {
 
         {/* Lorman - Categorias */}
         <div>
-          <Categories type="curso" />
-          <Categories type="curso" />
+          <CategoriesGrid type="curso" />
         </div>
 
         <div className="d-flex justify-content-end w-100">

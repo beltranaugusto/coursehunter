@@ -8,7 +8,7 @@ export const Card = (props) => {
 
   return (
     <>
-      <div className="card">
+      <div className="card col-1">
         <img
           src={`${props.data?.img_url}`}
           className="card-img-top"

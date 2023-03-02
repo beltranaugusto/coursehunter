@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Card } from "./Card.jsx";
 
-export const Categories = (props) => {
+export const CategoriesGrid = (props) => {
   let type = props.type;
   const [posts, setPosts] = useState([]);
   const { store, actions } = useContext(Context);
@@ -69,7 +69,7 @@ export const Categories = (props) => {
     <>
       <div className="home">
         <div className="container container-categories">
-          <div className="home-card-list">
+          <div className="home-card-list row">
             {store.searchCategory !== ""
               ? posts
                   .filter((data) => data.categories == store?.searchCategory)
