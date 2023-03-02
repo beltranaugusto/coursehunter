@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { SearchBar } from "../tools/searchBar";
-import { Categories } from "../component/Categories.jsx";
+import { CategoriesGrid } from "../component/CategoriesGrid.jsx";
 
 import { Context } from "../store/appContext";
 
 export const Events = () => {
   const { store, actions } = useContext(Context);
+
+  useEffect(() => {
+    actions.cleanInput()
+  }, [])
 
   return (
     <>
@@ -17,8 +21,7 @@ export const Events = () => {
         </div>
 
         <div>
-          <Categories type="evento" />
-          <Categories type="evento" />
+        <CategoriesGrid type="evento" />
         </div>
 
         <div className="d-flex justify-content-end w-100">

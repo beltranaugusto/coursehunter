@@ -103,7 +103,7 @@ class Post(db.Model):
             "date": self.date,
             "duration": self.duration,
             "certificate": self.certificate,
-            # "author_name": self.author_name,
+            "author_name": self.author_name,
             "img_url": self.img_url,
             "cloudinary_id": self.cloudinary_id,
             "event": self.event

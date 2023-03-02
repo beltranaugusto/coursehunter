@@ -13,6 +13,7 @@ export const Profile = () => {
 
 
   useEffect(() => {
+    actions.cleanInput()
     actions.getUserAlt(id)
     actions.getUser(id)
   }, [id])

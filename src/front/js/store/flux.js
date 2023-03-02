@@ -92,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           let data = await response.json();
           console.log(data);
           setStore({
-            postcourses: data,
+            postcourses: data
           });
         } catch (error) {
           console.log(`${error} error`);
@@ -152,7 +152,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           let response = await fetch(`${getStore().urlBase}/user/${user_id}`);
           let data = await response.json();
           console.log(data);
-          setStore({ tempUserData: data });
+          setStore({ tempUserData: data, searchCategory: "", searchValue: "" });
         } catch (error) {
           console.log(error);
         }
@@ -186,6 +186,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         setStore({ coursesandeventsbycategory: uniquecategory });
       },
+      cleanInput: () => {
+        setStore({ searchCategory: "", searchValue: "" });
+      }
     },
   };
 };

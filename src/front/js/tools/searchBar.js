@@ -26,7 +26,7 @@ export const SearchBar = () => {
       <ul className="dropdown-menu dropdown-menu-end">
         {coursesandeventsbycategory?.map((category, index) => (
           <li key={index}>
-            <div className="dropdown-item">
+            <div className="dropdown-item d-flex align-items-center justify-content-between">
               {category}
               <input
                 className="form-check-input mt-0 float-end"
@@ -44,11 +44,10 @@ export const SearchBar = () => {
             className="text-center mt-2"
             onClick={() => actions.filterbycategory("")}
           >
-            <p>Eliminar filtros</p>
+            <btn className="btn btn-warning">Limpiar Filtros</btn>
           </div>
         </li>
       </ul>
-      ;
     </div>
   );
 };
