@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { Card } from "../component/Card.jsx";
 import "../../styles/home.css";
+import logo from "../../img/logo2.png";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -14,33 +15,40 @@ export const Home = () => {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-12">
-          {/* <p className="text-center bg-light text-dark fs-5">
-            Página web para busca cursos y eventos disponibles relacionados con
-            aprendizaje y formación personal, profesional y académica dentro del
-            territorio venezolano. Ofrecemos una plataforma donde los educadores
-            pueden publicar sus cursos o eventos para estudiantes interesados en
-            adquirir nuevos conocimientos dentro de distintas categorías.
-          </p> */}
+      <div className="row d-flex justify-content-center bg-light mt-4 border rounded">
+        <div className="col-12 hero-section d-flex flex-column justify-content-end mb-4">
+          <img className="hero-img mx-auto" src={logo}></img>
+          <h1 className="display-2 mx-5 mt-5">Todo empieza <span className="underline">aquí.</span></h1>
+          <h3 className="display-5 mx-5 fw-light">Obtén el conocimiento que anhelas.</h3>
+          <div className="mx-auto">
+            <p className="hero-text text-dark fs-5">
+              Ofrecemos una plataforma donde los educadores
+              pueden publicar sus cursos o eventos para estudiantes interesados en
+              adquirir nuevos conocimientos dentro de distintas categorías.
+            </p>
+          </div>
+          
         </div>
-        <div className="col-6">
-          <p className="text-center bg-light text-dark fs-5">
-            Cursos <br></br>
-            <Link to="/cursos">
-              <button className="btn btn-secondary">Visitar</button>
-            </Link>
-          </p>
-        </div>
-        <div className="col-6">
-          <p className="text-center bg-light text-dark  fs-5">
-            Eventos <br />
-            <a href="#" className="btn btn-secondary">
-              Visitar
-            </a>
-          </p>
-        </div>
-        <div className="col-8 bg-light text-dark" id="proximos-cursos">
+        
+          <div className="col-4 home-post-display one bg-light mx-4 my-4 mb-5">
+            <p className="text-center display-5 fs-1">
+              Cursos <br></br>
+              <Link to="/cursos">
+                <button className="btn btn-secondary">Ver</button>
+              </Link>
+            </p>
+          </div>
+            <div className="col-4 home-post-display two bg-light mx-4 my-4 mb-5">
+            <p className="text-center display-5 fs-1">
+              Eventos <br />
+              <Link to="/eventos">
+                <button className="btn btn-secondary">Ver</button>
+              </Link>
+            </p>
+          </div>
+        
+        
+        <div className="col-8 bg-light" id="proximos-cursos">
           <p className="fs-5">Proximos Cursos/Eventos</p>
           <Card />
         </div>
