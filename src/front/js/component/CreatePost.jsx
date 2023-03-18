@@ -123,7 +123,7 @@ export const CreatePost = (props) => {
 
     return (
         <>
-            <div className="container border rounded h-100 w-100 d-flex flex-column mt-5 p-4 create-post">
+            <div className="container border rounded h-100 w-100 d-flex flex-column mt-5 p-4 create-post bg-light">
                 <form>
                     {step === 0 ? (
                         <>
@@ -134,7 +134,7 @@ export const CreatePost = (props) => {
                                 Elige que tipo de publicación será.
                             </p>
                             <div className="container mt-4 d-flex justify-content-center">
-                                <div className="container mx-2 py-4 border rounded text-center fw-light post-choice">
+                                <div className="container mx-2 py-4 border rounded text-center fw-light post-choice bg-white">
                                     <h2 className="mb-3 fw-light">Cursos</h2>
                                     <p className="fs-5 m-1 text-muted ">
                                         Lorem ipsum dolor sit amet.
@@ -153,7 +153,7 @@ export const CreatePost = (props) => {
                                         Crear un Curso
                                     </button>
                                 </div>
-                                <div className="container mx-2 py-4 border rounded text-center fw-light post-choice">
+                                <div className="container mx-2 py-4 border rounded text-center fw-light post-choice bg-white">
                                     <h2 className="mb-3 fw-light">Eventos</h2>
                                     <p className="fs-5 m-1 text-muted ">
                                         Lorem ipsum dolor sit amet.
@@ -396,10 +396,9 @@ export const CreatePost = (props) => {
                                         value={inputCategory}
                                     >
                                         <option>Tecnologia</option>
-                                        <option>Artes Culinarias</option>
-                                        <option>Automotriz</option>
                                         <option>Artes</option>
-                                        <option>Blockchain</option>
+                                        <option>Idiomas</option>
+                                        <option>Negocios</option>
                                     </select>
                                 </div>
                             </div>
@@ -440,7 +439,7 @@ export const CreatePost = (props) => {
                         </>
                     ) : null}
                     {step === 3 ? (
-                        <div className="d-flex flex-column justify-content-center align-items-center text-center">
+                        <div className="d-flex flex-column justify-content-center align-items-center text-center my-5">
                             <h1 className="display-6 mx-4 mt-2">
                                 ¡Estamos Listos!
                             </h1>

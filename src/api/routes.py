@@ -240,7 +240,7 @@ def post_email(user_id=None, publisher_id=None, post_id=None):
         post = Post.query.filter_by(id=post_id).first()
 
         email = EmailMessage()
-        email['Subject'] = 'CourseHunter: %s solicitó información acerca de tu curso %s' % (asking.username, post.name)
+        email['Subject'] = 'CourseHunter: %s solicitó información acerca de tu publicación %s' % (asking.username, post.name)
         email['From'] = 'coursehunter.info@gmail.com'
         email['To'] = asked.email
         email['reply-to'] = asking.email
@@ -262,13 +262,12 @@ def post_email(user_id=None, publisher_id=None, post_id=None):
                         }
                         .correo {
                             max-width: 800px;
-                            border: 1px solid black;
-                            border-radius: 15px;
+                            border: 1px solid #f8f9fa;
+                            border-radius: 10px;
                             margin: 20px;
                             padding: 40px 60px 40px 60px;
                         }
                         .titulo {
-                            border-bottom: 1px solid black;
                             display: inline-block;
                         }
                         .responde {
@@ -289,11 +288,14 @@ def post_email(user_id=None, publisher_id=None, post_id=None):
                         .m-t {
                             margin-top: 1.75em;
                         }
+                        img {
+                            margin: -40px -20px -38px -40px;
+                        }
                         </style>
                     </head>
                     <body>
                         <div class="correo">
-                            <h1 class="titulo">CourseHunter</h1>
+                            <img width="100px" height="100px" src="https://i.imgur.com/AWjVQzy.png"/>
                             <p>
                                 <div class="nombre m-r">%s</div> solicitó información acerca de tu publicación: <div class="nombre m-r m-l">%s</div>.
                             </p>
@@ -324,15 +326,15 @@ def post_email(user_id=None, publisher_id=None, post_id=None):
             print(error)
             return jsonify({"message": "Error, try again"}), 500
 
-@api.route('/delete/<int:post_id>', methods=['DELETE'])
-def delPost(post_id=None):
-    if request.method =='DELETE':
-        if Post.query.filter_by(id=post_id).first():
-            post= Post.query.filter_by(id=post_id).first()
-            db.session.delete(post)
-            db.session.commit()
-            return jsonify({'Message':'Post has been deleted'}), 200
-        return ('Message':'Post has been deleted')
+# @api.route('/delete/<int:post_id>', methods=['DELETE'])
+# def delPost(post_id=None):
+#     if request.method =='DELETE':
+#         if Post.query.filter_by(id=post_id).first():
+#             post= Post.query.filter_by(id=post_id).first()
+#             db.session.delete(post)
+#             db.session.commit()
+#             return jsonify({'Message':'Post has been deleted'}), 200
+#         return ('Message':'Post has been deleted')
 
 
             

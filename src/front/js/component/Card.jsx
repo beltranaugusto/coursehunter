@@ -11,7 +11,7 @@ export const Card = (props) => {
       <div className="card col-1">
         <img
           src={`${props.data?.img_url}`}
-          className="card-img-top"
+          className="card-img-top mb-2 border-bottom"
           alt="..."
         />
         <div className="card-body text-center">
@@ -36,7 +36,7 @@ export const Card = (props) => {
             <div className="card-button mx-2">
             <Link
               to={`/${props.type}/${props.data?.id}`}
-              className="btn btn-primary"
+              className="btn btn-secondary"
             >
               Ver mas
             </Link>

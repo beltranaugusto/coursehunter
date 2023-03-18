@@ -103,6 +103,8 @@ export const Categories = (props) => {
                     return <Card key={data.id} data={data} type={type} />;
                   }
                 })}
+
+                {posts.length == 0 ? <h3 className="fw-light">No hay nada aqui!</h3 >: null}
           </div>
         </div>
       </div>

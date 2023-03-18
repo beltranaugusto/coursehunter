@@ -1,23 +1,29 @@
+body {
+  background-color: #f3f3f3;
+}
+
 .container-categories {
   margin-bottom: 30px;
   margin-top: 30px;
 }
 .home-card-list {
-  gap: 10px;
+  gap: 15px;
   display: flex;
   overflow-x: scroll !important;
   border-radius: 10px;
 }
 .home-card-list::-webkit-scrollbar {
+  margin-top: 5px;
   width: 8px;
   height: 12px;
 }
 .home-card-list::-webkit-scrollbar-track {
-  background-color: white;
+  background-color: #f8f9fa;
 }
 .home-card-list::-webkit-scrollbar-thumb {
-  background-color: gray;
-  border-radius: 4px;
+  
+  background-color: #6c757d;
+  border-radius: 2px;
 }
 
 .home-card-list {
@@ -38,9 +44,10 @@
 }
 .card-img-top {
   width: 100%;
-  height: 300px;
+  height: 200px;
 }
 
 .footer {
-  background-color: #354350 !important;
+  margin: 55px 0px 50px 0px;
+  
 }

@@ -19,20 +19,23 @@ export const Profile = () => {
   }, [id])
 
   return (
-    <div className="profile mx-auto">
+    <div className="profile gx-0 mx-auto">
       
       <div className="container mt-5">
         <div className="row d-flex gx-5 justify-content-center mx-auto">
-          <div className="col-12 col-md-3 d-flex justify-content-center p-0">
+          <div className="col-12 col-md-3 border bg-light d-flex justify-content-center p-0">
+            <div>
             <img
               src={store?.tempUserData?.img_url}
               className="rounded w-100 h-100"
               alt="..."
               
             />
+            </div>
+            
           </div>
-          <div className="col-12 col-md-8">
-            <div className="card-body  border rounded d-flex flex-column justify-content-between h-100">
+          <div className="col-12 col-md-9">
+            <div className="card-body  border rounded d-flex flex-column justify-content-between h-100 bg-light">
               
                 <h2 className="display-5 mx-2 my-4">{store?.tempUserData?.username}</h2>
                 <div className="user-props">
@@ -61,7 +64,7 @@ export const Profile = () => {
                         </ul>
                       </div>
                       
-                      <button className="btn btn-success">Seguir</button>
+                      <button className="btn btn-success w-25 fs-4">Seguir</button>
                   </div>
                 </div>         
             </div>
@@ -69,27 +72,27 @@ export const Profile = () => {
         </div>
       </div>
       <div className="container my-4">
-        <div className="row d-flex justify-content-start mx-auto">
-          <div className="col-12 col-md-8 no-padding-left">
-            <div className="border rounded ">
+        <div className="row d-flex justify-content-start mx-auto ">
+          <div className="col-12 col-md-12 no-padding-left bandaid">
+            <div className="border rounded bg-light px-4 pt-3">
               
               {(() => {
                 if(store.userData.id == store.tempUserData.id){
                   if(store.userData?.publisherMode){
                     return (<>
-                    <h5 className="display-5 m-4">Creadas</h5>
+                    <h5 className="display-5 m-4">Publicaciones de este usuario:</h5>
                     <Categories created="true"/> 
                     </>)
                   }else{
                     return (<>
-                      <h5 className="display-5 m-4">Guardados</h5>
+                      <h5 className="display-5 m-4">Guardados:</h5>
                       <Categories favorite="true"/>
                     </>)
                   }
                 } else{
                   return (
                     <>
-                    <h5 className="display-5 m-4">Creadas</h5>
+                    <h5 className="display-5 m-4">Publicaciones de este usuario:</h5>
                     <Categories created="true"/> 
                     </>
                   )
@@ -97,8 +100,10 @@ export const Profile = () => {
               })()}
               
             </div>
-          </div>
-          <div className="col-12 col-md-4 border feedback rounded d-flex flex-column justify-content-between">
+          </div>       
+        </div>
+          <div className="my-4 d-flex row justify-content-center border rounded bg-light">
+          <div className="col-12 col-md-4  feedback d-flex flex-column justify-content-between p-2">
             <div className="m-1 my-2">
               <div className="border rounded feedback-msg mx-1 my-2"></div>
               <div className="border rounded feedback-msg mx-1 my-2"></div>
@@ -110,8 +115,12 @@ export const Profile = () => {
                {'>'}
               </button>
             </div>
-          </div>         
+          </div>
+          <div className="col-md-8">
+          </div> 
         </div>
+        
+        
       </div>
     </div>
   );

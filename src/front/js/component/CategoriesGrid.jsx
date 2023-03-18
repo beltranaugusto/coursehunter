@@ -69,7 +69,7 @@ export const CategoriesGrid = (props) => {
     <>
       <div className="home">
         <div className="container container-categories">
-          <div className="home-card-list row">
+          <div className="home-card-list row gx-0">
             {store.searchCategory !== ""
               ? posts
                   .filter((data) => data.categories == store?.searchCategory)
