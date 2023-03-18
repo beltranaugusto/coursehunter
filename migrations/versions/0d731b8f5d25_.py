@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: d1d3c321ab7d
+Revision ID: 0d731b8f5d25
 Revises: 
-Create Date: 2023-03-01 18:26:15.502109
+Create Date: 2023-03-02 15:29:14.192315
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd1d3c321ab7d'
+revision = '0d731b8f5d25'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -54,7 +54,7 @@ def upgrade():
     sa.Column('date', sa.DateTime(timezone=True), nullable=True),
     sa.Column('duration', sa.String(length=200), nullable=False),
     sa.Column('certificate', sa.Boolean(), nullable=False),
-    sa.Column('creationDate', sa.DateTime(timezone=True), server_default='2023-03-01 18:26:14.954791', nullable=True),
+    sa.Column('creationDate', sa.DateTime(timezone=True), server_default='2023-03-02 15:29:13.615454', nullable=True),
     sa.Column('img_url', sa.String(length=200), nullable=False),
     sa.Column('cloudinary_id', sa.String(length=200), nullable=False),
     sa.ForeignKeyConstraint(['categories'], ['categories.name'], ),

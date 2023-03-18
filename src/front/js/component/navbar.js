@@ -12,7 +12,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <nav className="navbar navbar-light bg-transparent border">
+    <nav className="navbar navbar-light bg-light border">
       <div className="container d-flex justify-content-between">
         <Link to="/">
           <img className="logo" width="150px" height="150px" src={logo}></img>

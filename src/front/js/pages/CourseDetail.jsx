@@ -26,10 +26,10 @@ export const CourseDetail = () => {
 
   return (
     <>
-      <div className="container border rounded mt-5 h-100 w-100 d-flex justify-content-between p-4">
-        <div className="d-flex flex-column left-col w-100">
+      <div className="container border rounded mt-5 h-100 w-100 d-flex justify-content-between p-4 bg-light mb-5">
+        <div className="d-flex flex-column left-col w-100 ">
           <div className="container">
-            <div className="text-center border rounded p-4">
+            <div className="text-center border rounded p-4 bg-white">
               <h2 className="display-5 ">{course?.name}</h2>
               <h1 className="small">
                 Creado por:
@@ -40,21 +40,21 @@ export const CourseDetail = () => {
             </div>
             <div className="img">
               <img
-                className=" border rounded mt-2 "
+                className=" border rounded mt-2 bg-white"
                 src={course?.img_url}
                 alt="..."
               />
             </div>
           </div>
-          <div className="container mt-4">
-            <div className="detail border rounded p-4">
+          <div className="container mt-4 ">
+            <div className="detail border rounded p-5 bg-white no-overflow">
               <p>{course?.detail}</p>
             </div>
           </div>
         </div>
 
         <div className="right-col">
-          <div className="h-100 border rounded p-4 d-flex flex-column justify-content-between">
+          <div className="h-100 border rounded p-4 d-flex flex-column justify-content-between bg-white">
             <ul className="list-group">
               {course?.categories ? (
                 <li className="list-group-item">

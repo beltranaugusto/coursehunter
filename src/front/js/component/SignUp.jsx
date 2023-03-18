@@ -51,7 +51,7 @@ export const SignUp = (props) => {
 
     return (
         <>
-            <div className="container border rounded h-100 w-100 d-flex flex-column p-4">
+            <div className="container border rounded h-100 w-100 d-flex flex-column p-4 border rounded bg-light my-5">
                 <div className="col-5 mx-auto">
                     {errorMessage && (
                         <div className="alert alert-danger" role="alert">
@@ -61,7 +61,8 @@ export const SignUp = (props) => {
                     )}
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <div className="col-5 mx-auto">
+                    <div className="col-5 mx-auto ">
+                    <h4 className="display-4 my-4">Registrate</h4>
                         <label htmlFor="usernameInput" className="form-label">
                             Usuario
                         </label>
@@ -74,7 +75,7 @@ export const SignUp = (props) => {
                         />
                     </div>
 
-                    <div className="col-5 mx-auto">
+                    <div className="col-5 mx-auto my-3">
                         <label htmlFor="emailInput" className="form-label">
                             Correo Electrónico
                         </label>
@@ -87,7 +88,7 @@ export const SignUp = (props) => {
                         />
                     </div>
 
-                    <div className="col-5 mx-auto">
+                    <div className="col-5 mx-auto my-3">
                         <label htmlFor="passwordInput" className="form-label">
                             Contraseña
                         </label>
@@ -101,18 +102,21 @@ export const SignUp = (props) => {
                     </div>
 
                     <div className="col-5 mx-auto">
+                                    <label htmlFor="imgInput" className="form-label">
+                                            Imagen de Perfil
+                                    </label>
                                     <input
                                         className="form-control"
                                         type="file"
                                         name="img_url"
-                                        id=""
+                                        id="imgInput"
                                         onChange={(e) =>
                                             setInputFile(e.target.files[0])
                                         }
                                     />
                                 </div>
 
-                    <div className="col-5 form-check mx-auto">
+                    <div className="col-5 form-check mx-auto my-3">
                         <input
                             id="publisherModeInput"
                             type="checkbox"
@@ -139,7 +143,7 @@ export const SignUp = (props) => {
 
                             <select
                                 name="category"
-                                className="form-control"
+                                className="form-control mb-4"
                                 onChange={(e) =>
                                     setPublisherType(e.target.value)
                                 }

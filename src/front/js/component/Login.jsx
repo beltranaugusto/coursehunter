@@ -25,16 +25,18 @@ export const Login = (props) => {
 
   return (
     <>
-      {errorMessage && (
-        <div className="alert alert-danger" role="alert">
-          Datos incorrectos.
-        </div>
-      )}
-      <div className="container border rounded h-100 w-100 d-flex flex-column p-4">
+
+      <div className="container border rounded h-100 w-100 d-flex flex-column p-4 border rounded bg-light my-5">
+          {errorMessage && (
+            <div className="alert alert-danger container mt-4" role="alert">
+              Datos incorrectos.
+            </div>
+          )}
         <form onSubmit={handleSubmit}>
-          <div className="col-5 mx-auto">
+          <div className="col-5 mx-auto my-3">
+            <h4 className="display-4 my-4">Inicia Sesión</h4>
             <label for="exampleFormControlInput1" className="form-label">
-              Email address
+              Correo Electronico
             </label>
             <input
               id="emailInput"
@@ -45,7 +47,7 @@ export const Login = (props) => {
             />
           </div>
 
-          <div className="col-5 mx-auto">
+          <div className="col-5 mx-auto my-3">
             <label for="exampleFormControlTextarea1" className="form-label">
               Contraseña
             </label>
@@ -57,21 +59,25 @@ export const Login = (props) => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
-          <div className="col-5 mx-auto">
-            <Link to="/sign_up">
-              <span className="mb-3">¿Nuevo? Click aqui para registrarse</span>
-            </Link>
-          </div>
-
-          <div className="col-5 mx-auto">
+            <div className="d-flex justify-content-center mt-4">
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary mx-3"
               onClick={() => actions.logIn(email, password)}
             >
               Ingresar
             </button>
+            <Link to="/sign_up">
+              <btn className="btn btn-success mx-3">¿Nuevo? Click aqui para registrarse</btn>
+            </Link>
+
+            </div>
+          <div className="col-5 mx-auto">
+            
+          </div>
+
+          <div className="col-5 mx-auto">
+            
           </div>
         </form>
       </div>

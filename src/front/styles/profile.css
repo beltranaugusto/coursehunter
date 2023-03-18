@@ -1,5 +1,6 @@
 .profile {
   max-width: 1180px;
+  min-width: 1180px;
 }
 
 .margin-right {
@@ -18,7 +19,7 @@
 }
 
 .feedback {
-  min-height: 400px;
+  min-height: 600px;
 }
 .feedback-msg {
   min-height: 40px;

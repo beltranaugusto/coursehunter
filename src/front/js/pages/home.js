@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { Card } from "../component/Card.jsx";
+import { Categories } from "../component/Categories.jsx";
 import "../../styles/home.css";
 import logo from "../../img/logo2.png";
 
@@ -45,82 +46,15 @@ export const Home = () => {
                 <button className="btn btn-secondary">Ver</button>
               </Link>
             </p>
-          </div>
-        
-        
-        <div className="col-8 bg-light" id="proximos-cursos">
-          <p className="fs-5">Proximos Cursos/Eventos</p>
-          <Card />
-        </div>
-        <div className="col-4 fs-5" id="categorias">
-          <p className="bg-light text-dark">Categorias</p>
-          <div className="list-group">
-            <a href="#" className="list-group-item list-group-item-action">
-              A simple default list group item
-            </a>
-
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-primary"
-            >
-              A simple primary list group item
-            </a>
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-secondary"
-            >
-              A simple secondary list group item
-            </a>
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-success"
-            >
-              A simple success list group item
-            </a>
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-danger"
-            >
-              A simple danger list group item
-            </a>
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-warning"
-            >
-              A simple warning list group item
-            </a>
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-info"
-            >
-              A simple info list group item
-            </a>
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-light"
-            >
-              A simple light list group item
-            </a>
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-dark"
-            >
-              A simple dark list group item
-            </a>
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-primary"
-            >
-              A simple primary list group item
-            </a>
-            <a
-              href="#"
-              className="list-group-item list-group-item-action list-group-item-secondary"
-            >
-              A simple secondary list group item
-            </a>
-          </div>
-        </div>
+          </div>   
+      </div>
+      <div className="row border rounded bg-light my-4">
+        <h5 className="display-5 m-4">Destacados</h5>
+          <Categories type="curso"/>
+      </div>
+      <div className="row border rounded bg-light my-4">
+        <h5 className="display-5 m-4">Proximamente</h5>
+          <Categories type="evento"/>
       </div>
     </div>
   );

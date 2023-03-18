@@ -13,3 +13,8 @@ p {
 .detail {
   max-width: 870px;
 }
+
+.no-overflow {
+  max-height: 390px;
+  overflow-y: scroll;
+}
